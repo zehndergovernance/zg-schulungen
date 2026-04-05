@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Zehnder Governance — Datenschutz Kernschulung</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#07100a;--forest:#0b1f12;--pine:#132d1a;--moss:#245430;--gold:#c08c28;--gold-l:#d4a94a;--cream:#f8f5ee;--r:10px;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:#f3f0e9;color:#222;font-family:'Outfit',sans-serif;line-height:1.65;}
+
+nav{background:var(--ink);padding:0 20px;height:56px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100;}
+.logo{font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:600;color:#fff;letter-spacing:.04em;}.logo em{color:var(--gold);font-style:normal;}
+.nbadge{background:rgba(192,140,40,.15);border:1px solid rgba(192,140,40,.3);border-radius:5px;padding:2px 9px;font-size:10px;font-weight:700;color:var(--gold-l);letter-spacing:.06em;}
+.nav-r{margin-left:auto;display:flex;gap:8px;align-items:center;}
+.cert-nav-btn{background:var(--gold);color:var(--ink);border:none;padding:6px 14px;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Outfit',sans-serif;display:none;}
+
+.layout{display:grid;grid-template-columns:220px 1fr;min-height:calc(100vh - 56px);}
+.sidebar{background:var(--ink);padding:12px 0;position:sticky;top:56px;height:calc(100vh - 56px);overflow-y:auto;}
+.sb-section{font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.25);padding:10px 14px 4px;}
+.mb{width:100%;text-align:left;background:transparent;border:none;padding:8px 14px;cursor:pointer;font-family:'Outfit',sans-serif;font-size:11.5px;color:rgba(255,255,255,.45);transition:all .15s;display:flex;align-items:center;gap:7px;line-height:1.3;}
+.mb:hover{background:rgba(255,255,255,.05);color:rgba(255,255,255,.8);}
+.mb.active{background:rgba(192,140,40,.12);color:var(--gold-l);border-left:2px solid var(--gold);}
+.mb.done .tick{display:inline!important;}
+.mb .mcode{font-size:9px;font-weight:700;background:rgba(255,255,255,.07);border-radius:3px;padding:1px 5px;min-width:30px;text-align:center;flex-shrink:0;}
+.mb.active .mcode{background:rgba(192,140,40,.2);color:var(--gold);}
+.mb.opt .mcode{background:rgba(21,101,192,.15);color:#90caf9;}
+.tick{display:none;color:#4caf50;margin-left:auto;font-size:13px;}
+.sb-prog{padding:10px 14px;border-top:1px solid rgba(255,255,255,.05);margin-top:6px;}
+.sp-lbl{font-size:9px;color:rgba(255,255,255,.3);margin-bottom:3px;}
+.sp-val{font-size:12px;font-weight:700;color:var(--gold-l);}
+.sp-bar{height:3px;background:rgba(255,255,255,.08);border-radius:2px;margin-top:4px;}
+.sp-fill{height:100%;background:var(--gold);border-radius:2px;transition:width .4s;}
+
+.main{padding:24px 28px;max-width:800px;}
+.mod{display:none;}.mod.active{display:block;}
+
+.mhdr{background:var(--ink);color:#fff;border-radius:var(--r);padding:20px 24px;margin-bottom:20px;}
+.mh-code{font-size:10px;font-weight:700;letter-spacing:.12em;color:var(--gold);margin-bottom:5px;}
+.mh-title{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;line-height:1.15;margin-bottom:5px;}
+.mh-sub{font-size:13px;color:rgba(255,255,255,.45);font-weight:300;}
+.mh-tags{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;}
+.mtag{font-size:10px;font-weight:600;background:rgba(255,255,255,.07);border-radius:4px;padding:2px 8px;color:rgba(255,255,255,.5);}
+
+.sec{margin-bottom:20px;}
+.sec h2{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:8px;padding-bottom:5px;border-bottom:2px solid var(--gold);display:inline-block;}
+.sec p{font-size:13px;color:#333;margin-bottom:7px;line-height:1.7;}
+.sec ul,.sec ol{margin:7px 0 7px 18px;font-size:13px;color:#333;}
+.sec li{margin-bottom:4px;line-height:1.6;}
+.sec strong{color:#111;}
+
+.ib{border-left:3px solid #1565c0;background:#e8f4fd;border-radius:0 6px 6px 0;padding:10px 13px;margin:8px 0;font-size:12.5px;color:#1a237e;line-height:1.6;}
+.wb{border-left:3px solid #f0a500;background:#fff3cd;border-radius:0 6px 6px 0;padding:10px 13px;margin:8px 0;font-size:12.5px;color:#7b4f00;line-height:1.6;}
+.ob{border-left:3px solid #2e7d32;background:#e8f5e9;border-radius:0 6px 6px 0;padding:10px 13px;margin:8px 0;font-size:12.5px;color:#1b5e20;line-height:1.6;}
+.rb{border-left:3px solid #c62828;background:#fce4ec;border-radius:0 6px 6px 0;padding:10px 13px;margin:8px 0;font-size:12.5px;color:#880e4f;line-height:1.6;}
+
+/* jurisdiction badge */
+.jb-wrap{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0;}
+.jb{font-size:10px;font-weight:700;padding:2px 8px;border-radius:3px;}
+.jb-eu{background:#1565c020;color:#1565c0;border:1px solid #1565c040;}
+.jb-ch{background:#c6281820;color:#c62818;border:1px solid #c6281840;}
+.jb-uk{background:#00338d20;color:#00338d;border:1px solid #00338d40;}
+.jb-us{background:#1a237e20;color:#1a237e;border:1px solid #1a237e40;}
+.jb-cn{background:#ff000020;color:#cc0000;border:1px solid #cc000040;}
+
+.tw{overflow-x:auto;margin:8px 0;}
+table{width:100%;border-collapse:collapse;font-size:12px;}
+th{background:var(--ink);color:#fff;padding:7px 9px;text-align:left;font-weight:600;}
+td{padding:6px 9px;border-bottom:1px solid #e0e0e0;vertical-align:top;}
+tr:nth-child(even) td{background:#fafafa;}
+
+.case-box{background:#fff;border:1px solid #e0e0e0;border-radius:8px;padding:14px;margin:10px 0;}
+.case-title{font-size:11px;font-weight:700;color:var(--gold);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;}
+.case-q{font-size:13px;font-weight:600;color:#111;margin-bottom:8px;}
+.case-reveal{background:var(--ink);color:#fff;border:none;padding:6px 14px;border-radius:5px;font-size:11px;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif;}
+.case-answer{display:none;margin-top:8px;font-size:12.5px;color:#333;line-height:1.6;padding:8px 10px;background:#f8f5ee;border-radius:5px;}
+
+.quiz-wrap{background:#fff;border:1px solid #e0e0e0;border-radius:var(--r);padding:18px;margin-top:20px;}
+.quiz-title{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:14px;padding-bottom:6px;border-bottom:2px solid var(--gold);}
+.qb{margin-bottom:16px;}
+.qt{font-size:13px;font-weight:600;color:#222;margin-bottom:7px;}
+.qo{display:flex;flex-direction:column;gap:4px;}
+.qo label{display:flex;align-items:flex-start;gap:7px;padding:6px 10px;border:1px solid #e0e0e0;border-radius:5px;cursor:pointer;font-size:12.5px;color:#333;transition:all .15s;line-height:1.5;}
+.qo label:hover{border-color:var(--gold);background:#fffdf5;}
+.qo input[type=radio]{accent-color:var(--gold);margin-top:2px;flex-shrink:0;}
+.qfb{display:none;padding:7px 10px;border-radius:4px;font-size:12px;margin-top:5px;}
+.qfok{background:#e8f5e9;color:#1b5e20;}.qferr{background:#fce4ec;color:#880e4f;}
+.qsub{background:var(--ink);color:#fff;border:none;padding:8px 20px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif;margin-top:6px;}
+.qsub:hover{background:var(--moss);}
+.qres{display:none;background:#f8f5ee;border:1px solid var(--gold);border-radius:7px;padding:14px;margin-top:10px;text-align:center;}
+.qrscore{font-size:26px;font-weight:700;color:var(--ink);margin-bottom:3px;}
+.qrmsg{font-size:12px;color:#555;}
+.nxt-btn{background:var(--gold);color:var(--ink);border:none;padding:9px 22px;border-radius:7px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Outfit',sans-serif;margin-top:8px;display:none;}
+
+.cert-panel{display:none;background:#fff;border:1px solid #e0e0e0;border-radius:var(--r);padding:28px;text-align:center;margin-top:20px;}
+.cert-panel.show{display:block;}
+.cert-ico{font-size:44px;margin-bottom:10px;}
+.cert-tit{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:var(--ink);margin-bottom:5px;}
+.cert-name{font-size:18px;font-weight:700;color:var(--gold);margin:8px 0;}
+.cert-inp{padding:7px 14px;border:1px solid #ddd;border-radius:5px;font-size:13px;width:240px;font-family:'Outfit',sans-serif;margin-top:8px;}
+.cert-print{background:var(--ink);color:#fff;border:none;padding:8px 18px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif;margin-top:10px;}
+@media print{nav,.sidebar,.nxt-btn,.qsub,.cert-print,.cert-inp{display:none!important;}.main{max-width:100%!important;}.cert-panel{border:2px solid var(--gold)!important;}}
+@media(max-width:680px){.layout{grid-template-columns:1fr;}.sidebar{position:static;height:auto;}.main{padding:14px;}}
+</style>
+</head>
+<body>
+<nav>
+  <span class="logo">ZEHNDER <em>GOVERNANCE</em></span>
+  <span class="nbadge">KERNSCHULUNG</span>
+  <div class="nav-r">
+    <button class="cert-nav-btn" id="certNavBtn" onclick="goToCert()">🎓 Zertifikat</button>
+  </div>
+</nav>
+<div class="layout">
+<div class="sidebar">
+  <div class="sb-section">Kernmodule</div>
+  <button class="mb active" onclick="go('m01')" id="btn-m01"><span class="mcode">M01</span>Personendaten<span class="tick">✓</span></button>
+  <button class="mb" onclick="go('m02')" id="btn-m02"><span class="mcode">M02</span>Wann gilt das Recht?<span class="tick">✓</span></button>
+  <button class="mb" onclick="go('m03')" id="btn-m03"><span class="mcode">M03</span>Anon. vs. Pseudon.<span class="tick">✓</span></button>
+  <button class="mb" onclick="go('m04')" id="btn-m04"><span class="mcode">M04</span>7 Prinzipien<span class="tick">✓</span></button>
+  <button class="mb" onclick="go('m05')" id="btn-m05"><span class="mcode">M05</span>Rechtsgrundlagen<span class="tick">✓</span></button>
+  <button class="mb" onclick="go('m06')" id="btn-m06"><span class="mcode">M06</span>Einwilligung<span class="tick">✓</span></button>
+  <button class="mb" onclick="go('m07')" id="btn-m07"><span class="mcode">M07</span>Minimierung & NTK<span class="tick">✓</span></button>
+  <button class="mb" onclick="go('m08')" id="btn-m08"><span class="mcode">M08</span>Löschung & Fristen<span class="tick">✓</span></button>
+  <button class="mb" onclick="go('m09')" id="btn-m09"><span class="mcode">M09</span>Verarbeitungsverz.<span class="tick">✓</span></button>
+  <button class="mb" onclick="go('m10')" id="btn-m10"><span class="mcode">M10</span>Informationspflichten<span class="tick">✓</span></button>
+  <button class="mb" onclick="go('m11')" id="btn-m11"><span class="mcode">M11</span>Verantwortung & DPO<span class="tick">✓</span></button>
+  <button class="mb" onclick="go('m12')" id="btn-m12"><span class="mcode">M12</span>Datenpannen & 72h<span class="tick">✓</span></button>
+  <button class="mb" onclick="go('m13')" id="btn-m13"><span class="mcode">M13</span>Sanktionen & Fälle<span class="tick">✓</span></button>
+  <button class="mb" onclick="go('mtest')" id="btn-mtest"><span class="mcode">TEST</span>Abschlusstest<span class="tick">✓</span></button>
+  <div class="sb-section" style="margin-top:6px;">Länder-Extras (optional)</div>
+  <button class="mb opt" onclick="go('lch')" id="btn-lch"><span class="mcode" style="background:rgba(198,40,40,.1);color:#c62818;">CH</span>Schweiz (nDSG)<span class="tick">✓</span></button>
+  <button class="mb opt" onclick="go('luk')" id="btn-luk"><span class="mcode" style="background:rgba(0,51,141,.1);color:#00338d;">UK</span>UK GDPR<span class="tick">✓</span></button>
+  <button class="mb opt" onclick="go('lus')" id="btn-lus"><span class="mcode" style="background:rgba(26,35,126,.1);color:#1a237e;">US</span>USA (CCPA)<span class="tick">✓</span></button>
+  <button class="mb opt" onclick="go('lcn')" id="btn-lcn"><span class="mcode" style="background:rgba(204,0,0,.1);color:#cc0000;">CN</span>China (PIPL)<span class="tick">✓</span></button>
+  <div class="sb-section" style="margin-top:6px;">KI-Module (optional)</div>
+  <button class="mb opt" onclick="go('mki')" id="btn-mki"><span class="mcode" style="background:rgba(103,58,183,.15);color:#7c4dff;">KI</span>KI am Arbeitsplatz<span class="tick">✓</span></button>
+  <div class="sb-prog">
+    <div class="sp-lbl">Kernmodule abgeschlossen</div>
+    <div class="sp-val" id="spval">0 / 14</div>
+    <div class="sp-bar"><div class="sp-fill" id="spfill" style="width:0%"></div></div>
+  </div>
+</div>
+<div class="main">
+
+<!-- M01 -->
+<div class="mod active" id="m01">
+  <div class="mhdr">
+    <div class="mh-code">MODUL M01 · ~10 Minuten</div>
+    <div class="mh-title">Was sind Personendaten?</div>
+    <div class="mh-sub">Definition, Beispiele, Abgrenzung — Grundlage für alles weitere</div>
+    <div class="mh-tags"><span class="mtag">👥 Alle Mitarbeitenden</span><span class="mtag">🌍 Alle Länder</span><span class="mtag">⚖️ Art. 4 DSGVO / Art. 5 nDSG / UK GDPR</span></div>
+  </div>
+  <div class="sec">
+    <h2>1. Die Definition</h2>
+    <p><strong>Personendaten sind alle Informationen, die sich auf eine identifizierte oder identifizierbare natürliche Person beziehen.</strong></p>
+    <p>Eine Person ist identifizierbar wenn man sie direkt oder indirekt identifizieren kann — durch Name, Nummer, Standortdaten, Online-Kennung oder andere Merkmale.</p>
+    <div class="ib"><strong>Einfache Regel:</strong> Kann ich aus dieser Information herausfinden oder ableiten, um wen es sich handelt? Falls ja — es sind Personendaten.</div>
+  </div>
+  <div class="sec">
+    <h2>2. Beispiele: Personendaten vs. keine Personendaten</h2>
+    <div class="tw"><table>
+      <tr><th>✅ Personendaten</th><th>❌ Keine Personendaten (wenn korrekt)</th></tr>
+      <tr><td>Name, Vorname</td><td>Vollständig anonymisierte Statistiken (z.B. "300 Kunden kauften X")</td></tr>
+      <tr><td>E-Mail-Adresse (auch geschäftlich)</td><td>Aggregierte Daten ohne Rückschluss auf Personen</td></tr>
+      <tr><td>IP-Adresse (in den meisten Fällen)</td><td>Unternehmensdaten (z.B. Firmenname ohne Ansprechpartner)</td></tr>
+      <tr><td>Standortdaten</td><td>Daten von Verstorbenen (je nach Jurisdiction)</td></tr>
+      <tr><td>Kundennummer (wenn zuordenbar)</td><td>Vollständig pseudonymisierte Daten — wenn Schlüssel getrennt</td></tr>
+      <tr><td>Foto, Stimme, Handschrift</td><td></td></tr>
+      <tr><td>Kfz-Kennzeichen</td><td></td></tr>
+      <tr><td>Cookie-ID / Device-ID</td><td></td></tr>
+    </table></div>
+  </div>
+  <div class="sec">
+    <h2>3. Besondere Kategorien (erhöhter Schutz)</h2>
+    <p>Diese Datenkategorien sind besonders schützenswert und dürfen grundsätzlich nicht verarbeitet werden — ausser es gibt eine explizite Ausnahme:</p>
+    <ul>
+      <li>Gesundheitsdaten (auch Krankmeldungen, Behinderung)</li>
+      <li>Genetische und biometrische Daten (Fingerabdruck, Gesichtserkennung)</li>
+      <li>Rassische und ethnische Herkunft</li>
+      <li>Politische Meinungen, religiöse/weltanschauliche Überzeugungen</li>
+      <li>Gewerkschaftszugehörigkeit</li>
+      <li>Sexualleben und sexuelle Orientierung</li>
+      <li>Strafrechtliche Verurteilungen und Straftaten</li>
+    </ul>
+    <div class="rb"><strong>Wichtig:</strong> Schon das Wissen "Person X ist krank" ist ein Gesundheitsdatum — auch wenn Sie den Diagnosedetails nicht kennen.</div>
+  </div>
+  <div class="sec">
+    <h2>4. Personendaten am Arbeitsplatz — typische Fälle</h2>
+    <div class="tw"><table>
+      <tr><th>Situation</th><th>Personendaten betroffen?</th></tr>
+      <tr><td>E-Mail von Max Muster an Sie</td><td>✅ Ja — Absender, Inhalt, Metadaten</td></tr>
+      <tr><td>Teilnehmerliste Meeting mit Namen</td><td>✅ Ja</td></tr>
+      <tr><td>Excel mit Umsätzen nach Vertriebsmitarbeiter</td><td>✅ Ja</td></tr>
+      <tr><td>Bewerbungsunterlagen</td><td>✅ Ja — besonders sensibel</td></tr>
+      <tr><td>Foto vom Teamanlass</td><td>✅ Ja — wenn Personen erkennbar</td></tr>
+      <tr><td>Anonymer Feedback-Bericht (wirklich anonym)</td><td>❌ Nein</td></tr>
+    </table></div>
+  </div>
+  <div class="sec">
+    <h2>5. Praktischer Fall</h2>
+    <div class="case-box">
+      <div class="case-title">🔍 Praxisfall</div>
+      <div class="case-q">Ihr Kollege sagt: "Ich gebe dem IT-Dienstleister nur die Kundennummern — keine Namen — das sind doch keine Personendaten mehr." Stimmt das?</div>
+      <button class="case-reveal" onclick="reveal(this)">Antwort anzeigen</button>
+      <div class="case-answer">Nein. Kundennummern sind Personendaten, wenn der Dienstleister (oder Ihr Unternehmen) die Zuordnung zu einer Person herstellen kann — z.B. durch die eigene Datenbank. Erst wenn der Dienstleister keinen Zugang zum Zuordnungsschlüssel hat, könnten es anonymisierte Daten sein. Das muss technisch sichergestellt und dokumentiert sein.</div>
+    </div>
+  </div>
+  <div class="quiz-wrap">
+    <div class="quiz-title">📋 Wissenscheck M01</div>
+    <div class="qb"><div class="qt">1. Eine E-Mail-Adresse wie <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cba2a5ada48ba6beb8bfaeb9ada2b9a6aae5a8a3">[email&#160;protected]</a> — ist das ein Personendatum?</div>
+      <div class="qo"><label><input type="radio" name="m01q1" value="a"> Nein, Firmen-E-Mails sind keine Personendaten</label>
+      <label><input type="radio" name="m01q1" value="b"> Ja, wenn sie auf eine bestimmte Person schliessen lässt (z.B. <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b2c4ddc0dcd3dfd79cdcd3dfd7f2d4dbc0dfd39cd1da">[email&#160;protected]</a>)</label>
+      <label><input type="radio" name="m01q1" value="c"> Nur wenn der Name explizit enthalten ist</label></div>
+      <div class="qfb" id="m01q1f"></div></div>
+    <div class="qb"><div class="qt">2. Welche Datenkategorie ist eine «besondere Kategorie» mit erhöhtem Schutz?</div>
+      <div class="qo"><label><input type="radio" name="m01q2" value="a"> Adressdaten</label>
+      <label><input type="radio" name="m01q2" value="b"> Gesundheitsdaten</label>
+      <label><input type="radio" name="m01q2" value="c"> Kaufhistorie</label></div>
+      <div class="qfb" id="m01q2f"></div></div>
+    <div class="qb"><div class="qt">3. Wann sind Daten «anonym» im Rechtssinn?</div>
+      <div class="qo"><label><input type="radio" name="m01q3" value="a"> Wenn der Name entfernt wurde</label>
+      <label><input type="radio" name="m01q3" value="b"> Wenn niemand mehr — auch nicht mit Zusatzwissen — die Person identifizieren kann</label>
+      <label><input type="radio" name="m01q3" value="c"> Wenn eine Kundennummer statt dem Namen verwendet wird</label></div>
+      <div class="qfb" id="m01q3f"></div></div>
+    <button class="qsub" onclick="chk('m01',['b','b','b'])">Antworten prüfen</button>
+    <div class="qres" id="m01res"></div>
+    <button class="nxt-btn" id="m01nxt" onclick="nxt('m01','m02')">Weiter: M02 Wann gilt das Recht? →</button>
+  </div>
+</div>
+
+<!-- M02 -->
+<div class="mod" id="m02">
+  <div class="mhdr">
+    <div class="mh-code">MODUL M02 · ~12 Minuten</div>
+    <div class="mh-title">Wann gilt Datenschutzrecht?</div>
+    <div class="mh-sub">DSGVO, nDSG, UK GDPR, CCPA, PIPL — wer ist betroffen, wann gilt was</div>
+    <div class="mh-tags"><span class="mtag">👥 Alle</span><span class="mtag">🌍 Alle Länder</span></div>
+  </div>
+  <div class="sec">
+    <h2>1. Räumlicher Anwendungsbereich — wer muss was einhalten?</h2>
+    <div class="tw"><table>
+      <tr><th>Gesetz</th><th>Gilt wenn...</th><th>Sanktion (max.)</th></tr>
+      <tr><td><span class="jb jb-eu">EU DSGVO</span></td><td>Unternehmen in EU/EWR tätig ODER verarbeitet Daten von EU-Ansässigen (Marktortprinzip Art. 3)</td><td>€20 Mio / 4% globaler Umsatz</td></tr>
+      <tr><td><span class="jb jb-ch">CH nDSG</span></td><td>Unternehmen in CH tätig ODER Auswirkungen auf CH-Ansässige (Auswirkungsprinzip)</td><td>CHF 250'000 (Personalstrafe!)</td></tr>
+      <tr><td><span class="jb jb-uk">UK GDPR</span></td><td>Unternehmen in UK tätig ODER verarbeitet Daten von UK-Ansässigen</td><td>£17.5 Mio / 4% globaler Umsatz</td></tr>
+      <tr><td><span class="jb jb-us">CCPA/CPRA</span></td><td>Bestimmte Schwellenwerte + Daten von Kaliforniern</td><td>$7'500/Verstoss (intentional)</td></tr>
+      <tr><td><span class="jb jb-cn">PIPL China</span></td><td>Verarbeitung von Daten chinesischer Staatsangehöriger in China</td><td>CNY 50 Mio / 5% Umsatz</td></tr>
+    </table></div>
+    <div class="wb"><strong>Wichtig für internationale Unternehmen:</strong> Mehrere Gesetze können gleichzeitig gelten. Ein Schweizer KMU mit EU-Kunden muss DSGVO UND nDSG einhalten.</div>
+  </div>
+  <div class="sec">
+    <h2>2. Das Marktortprinzip — auch ohne EU-Niederlassung</h2>
+    <p>Die DSGVO gilt auch für Unternehmen ausserhalb der EU, wenn sie:</p>
+    <ul>
+      <li>Waren oder Dienstleistungen an EU-Ansässige anbieten (auch kostenlose), oder</li>
+      <li>das Verhalten von EU-Ansässigen beobachten (z.B. Tracking)</li>
+    </ul>
+    <div class="ob">Beispiel: Ein US-Unternehmen das eine App in Deutsch anbietet und Preise in Euro nennt — unterliegt der DSGVO, auch ohne EU-Büro.</div>
+  </div>
+  <div class="sec">
+    <h2>3. Sachlicher Anwendungsbereich — was ist erfasst?</h2>
+    <ul>
+      <li>Automatisierte Verarbeitung von Personendaten (Computer, Apps, Datenbanken)</li>
+      <li>Nicht-automatisierte Verarbeitung wenn in einem Dateisystem geordnet (z.B. physische Personalakten)</li>
+      <li><strong>Nicht erfasst:</strong> Rein private, haushaltsführende Verarbeitung (Freundeliste im Handy)</li>
+      <li><strong>Nicht erfasst:</strong> Verstorbene Personen (in den meisten Jurisdiktionen)</li>
+      <li><strong>Nicht erfasst:</strong> Juristische Personen (Firmen) — aber natürliche Ansprechpartner schon</li>
+    </ul>
+  </div>
+  <div class="sec">
+    <h2>4. Rollen: Wer ist was?</h2>
+    <div class="tw"><table>
+      <tr><th>Rolle</th><th>Definition</th><th>Beispiel</th></tr>
+      <tr><td><strong>Verantwortlicher (Controller)</strong></td><td>Entscheidet über Zweck und Mittel der Verarbeitung</td><td>Ihr Unternehmen das Kundendaten verarbeitet</td></tr>
+      <tr><td><strong>Auftragsverarbeiter (Processor)</strong></td><td>Verarbeitet Daten im Auftrag des Verantwortlichen</td><td>Cloud-Anbieter, Lohnbüro, Callcenter</td></tr>
+      <tr><td><strong>Gemeinsam Verantwortliche</strong></td><td>Zwei Verantwortliche entscheiden gemeinsam</td><td>Gemeinsame Marketingkampagne zweier Firmen</td></tr>
+      <tr><td><strong>Betroffene Person</strong></td><td>Natürliche Person deren Daten verarbeitet werden</td><td>Ihr Kunde, Ihr Mitarbeiter</td></tr>
+    </table></div>
+    <div class="ib">Als Auftragsverarbeiter trägt der Verantwortliche die Hauptverantwortung. Der Auftragsverarbeiter haftet für eigene Verstösse gegen den Auftrag.</div>
+  </div>
+  <div class="quiz-wrap">
+    <div class="quiz-title">📋 Wissenscheck M02</div>
+    <div class="qb"><div class="qt">1. Ein Schweizer KMU verkauft an deutsche Kunden. Welches Datenschutzrecht gilt?</div>
+      <div class="qo"><label><input type="radio" name="m02q1" value="a"> Nur nDSG</label>
+      <label><input type="radio" name="m02q1" value="b"> Nur DSGVO</label>
+      <label><input type="radio" name="m02q1" value="c"> Beide — nDSG und DSGVO (Marktortprinzip)</label></div>
+      <div class="qfb" id="m02q1f"></div></div>
+    <div class="qb"><div class="qt">2. Ihr Cloud-Anbieter speichert Ihre Kundendaten. Welche Rolle hat er?</div>
+      <div class="qo"><label><input type="radio" name="m02q2" value="a"> Eigenständiger Verantwortlicher</label>
+      <label><input type="radio" name="m02q2" value="b"> Auftragsverarbeiter</label>
+      <label><input type="radio" name="m02q2" value="c"> Betroffene Person</label></div>
+      <div class="qfb" id="m02q2f"></div></div>
+    <div class="qb"><div class="qt">3. In der CH ist die maximale Sanktion eine Personalstrafe von bis zu...</div>
+      <div class="qo"><label><input type="radio" name="m02q3" value="a"> CHF 50'000</label>
+      <label><input type="radio" name="m02q3" value="b"> CHF 250'000</label>
+      <label><input type="radio" name="m02q3" value="c"> CHF 1 Mio</label></div>
+      <div class="qfb" id="m02q3f"></div></div>
+    <button class="qsub" onclick="chk('m02',['c','b','b'])">Antworten prüfen</button>
+    <div class="qres" id="m02res"></div>
+    <button class="nxt-btn" id="m02nxt" onclick="nxt('m02','m03')">Weiter: M03 Anonymisierung →</button>
+  </div>
+</div>
+
+<!-- M03 -->
+<div class="mod" id="m03">
+  <div class="mhdr">
+    <div class="mh-code">MODUL M03 · ~10 Minuten</div>
+    <div class="mh-title">Anonymisierung vs. Pseudonymisierung</div>
+    <div class="mh-sub">Was ist der Unterschied — und warum ist er entscheidend?</div>
+    <div class="mh-tags"><span class="mtag">👥 Alle</span><span class="mtag">🌍 Alle Länder</span></div>
+  </div>
+  <div class="sec">
+    <h2>1. Anonymisierung — kein Datenschutz mehr nötig</h2>
+    <p><strong>Anonymisierung</strong> liegt vor wenn Personendaten so verändert wurden, dass die Person weder direkt noch indirekt identifiziert werden kann — auch nicht mit Zusatzwissen, auch nicht mit vernünftigem Aufwand.</p>
+    <div class="ob">Echte Anonymisierung = kein Datenschutzrecht anwendbar. Keine Rechtsgrundlage nötig, keine Betroffenenrechte, keine Löschfristen.</div>
+    <div class="rb"><strong>Achtung:</strong> Echter Anonymisierung ist technisch sehr anspruchsvoll. "Ich habe den Namen entfernt" reicht fast nie. Re-Identifizierung durch Kombination von Restdaten ist oft möglich.</div>
+  </div>
+  <div class="sec">
+    <h2>2. Pseudonymisierung — Datenschutz bleibt anwendbar</h2>
+    <p><strong>Pseudonymisierung</strong> bedeutet: direkt identifizierende Merkmale werden durch ein Pseudonym (Kürzel, Nummer) ersetzt. Der Schlüssel zur Rückidentifizierung existiert aber noch.</p>
+    <div class="wb">Pseudonymisierte Daten sind <strong>weiterhin Personendaten</strong>. Datenschutzrecht gilt. Aber das Risiko ist reduziert — und die DSGVO belohnt das (z.B. als Schutzmassnahme).</div>
+  </div>
+  <div class="sec">
+    <h2>3. Der Vergleich</h2>
+    <div class="tw"><table>
+      <tr><th>Merkmal</th><th>Anonymisierung</th><th>Pseudonymisierung</th></tr>
+      <tr><td>Personenbezug</td><td>Keiner mehr</td><td>Vorhanden (mit Schlüssel)</td></tr>
+      <tr><td>Datenschutzrecht</td><td>❌ Nicht anwendbar</td><td>✅ Weiterhin anwendbar</td></tr>
+      <tr><td>Rechtsgrundlage nötig?</td><td>Nein</td><td>Ja</td></tr>
+      <tr><td>Rückidentifizierung</td><td>Nicht möglich (theoretisch)</td><td>Mit Schlüssel möglich</td></tr>
+      <tr><td>Risiko bei Datenpanne</td><td>Kein Datenschutzrisiko</td><td>Reduziertes Risiko</td></tr>
+      <tr><td>Beispiel</td><td>"300 Kunden kauften X" (ohne Rückschluss)</td><td>Kunden-ID "K-4792" statt Name (Schlüssel in getrennter DB)</td></tr>
+    </table></div>
+  </div>
+  <div class="sec">
+    <h2>4. Techniken und ihre Grenzen</h2>
+    <ul>
+      <li><strong>Namensersetzung:</strong> Pseudonymisierung — Name bleibt in anderem System vorhanden</li>
+      <li><strong>Datenaggregation:</strong> Kann Anonymisierung sein — wenn Gruppen gross genug (k-Anonymität)</li>
+      <li><strong>Datenverschlüsselung:</strong> Keine Anonymisierung — Schlüssel ermöglicht Rückidentifizierung</li>
+      <li><strong>Datenlöschung:</strong> Echte Anonymisierung nur wenn alle Kopien gelöscht und keine Rückschlüsse möglich</li>
+    </ul>
+  </div>
+  <div class="sec">
+    <h2>5. Praxisfall</h2>
+    <div class="case-box">
+      <div class="case-title">🔍 Praxisfall</div>
+      <div class="case-q">Ihre Datenabteilung will Kundendaten für Analysen nutzen. Sie ersetzt die Namen durch IDs (ID-123, ID-456). Die Zuordnungstabelle liegt in einem separaten System. Ist jetzt Datenschutzrecht anwendbar?</div>
+      <button class="case-reveal" onclick="reveal(this)">Antwort anzeigen</button>
+      <div class="case-answer">Ja — es handelt sich um Pseudonymisierung, nicht Anonymisierung. Ihr Unternehmen hat noch den Schlüssel (Zuordnungstabelle). Datenschutzrecht bleibt anwendbar. Aber: Das ist trotzdem empfehlenswert — es reduziert das Risiko und wird von Datenschutzbehörden positiv bewertet.</div>
+    </div>
+  </div>
+  <div class="quiz-wrap">
+    <div class="quiz-title">📋 Wissenscheck M03</div>
+    <div class="qb"><div class="qt">1. Pseudonymisierte Daten unterliegen dem Datenschutzrecht. Richtig oder falsch?</div>
+      <div class="qo"><label><input type="radio" name="m03q1" value="a"> Falsch — ohne Namen kein Datenschutz</label>
+      <label><input type="radio" name="m03q1" value="b"> Richtig — der Schlüssel ermöglicht Rückidentifizierung</label></div>
+      <div class="qfb" id="m03q1f"></div></div>
+    <div class="qb"><div class="qt">2. Was unterscheidet Anonymisierung von Pseudonymisierung?</div>
+      <div class="qo"><label><input type="radio" name="m03q2" value="a"> Bei Anonymisierung ist Rückidentifizierung nicht mehr möglich — auch nicht mit Schlüssel</label>
+      <label><input type="radio" name="m03q2" value="b"> Anonymisierung entfernt nur den Namen</label>
+      <label><input type="radio" name="m03q2" value="c"> Pseudonymisierung eliminiert alle Personenbezüge</label></div>
+      <div class="qfb" id="m03q2f"></div></div>
+    <button class="qsub" onclick="chk('m03',['b','a'])">Antworten prüfen</button>
+    <div class="qres" id="m03res"></div>
+    <button class="nxt-btn" id="m03nxt" onclick="nxt('m03','m04')">Weiter: M04 7 Prinzipien →</button>
+  </div>
+</div>
+
+<!-- M04 -->
+<div class="mod" id="m04">
+  <div class="mhdr">
+    <div class="mh-code">MODUL M04 · ~10 Minuten</div>
+    <div class="mh-title">Die 7 Datenschutzprinzipien</div>
+    <div class="mh-sub">Rechtmässigkeit · Zweckbindung · Minimierung · Richtigkeit · Speicherbegrenzung · Integrität · Rechenschaft</div>
+    <div class="mh-tags"><span class="mtag">👥 Alle</span><span class="mtag">🌍 Alle Länder</span><span class="mtag">⚖️ Art. 5 DSGVO / Art. 6 nDSG / UK GDPR</span></div>
+  </div>
+  <div class="sec">
+    <h2>Die 7 Grundsätze im Überblick</h2>
+    <div class="tw"><table>
+      <tr><th>#</th><th>Prinzip</th><th>Was bedeutet das konkret?</th><th>Beispiel Verstoss</th></tr>
+      <tr><td><strong>1</strong></td><td><strong>Rechtmässigkeit</strong></td><td>Es braucht eine Rechtsgrundlage (Einwilligung, Vertrag, gesetzl. Pflicht, berechtigtes Interesse)</td><td>Newsletter ohne Einwilligung versenden</td></tr>
+      <tr><td><strong>2</strong></td><td><strong>Zweckbindung</strong></td><td>Daten dürfen nur für den erhobenen Zweck genutzt werden</td><td>Bewerberdaten für Marketingzwecke nutzen</td></tr>
+      <tr><td><strong>3</strong></td><td><strong>Datenminimierung</strong></td><td>Nur Daten erheben die tatsächlich für den Zweck nötig sind</td><td>Formular das Geburtsdatum verlangt obwohl nicht nötig</td></tr>
+      <tr><td><strong>4</strong></td><td><strong>Richtigkeit</strong></td><td>Daten müssen korrekt und aktuell sein</td><td>Veraltete Adressen die nie aktualisiert werden</td></tr>
+      <tr><td><strong>5</strong></td><td><strong>Speicherbegrenzung</strong></td><td>Daten nur so lange aufbewahren wie nötig</td><td>Kundendaten 20 Jahre ohne Grund aufbewahren</td></tr>
+      <tr><td><strong>6</strong></td><td><strong>Integrität & Vertraulichkeit</strong></td><td>Angemessene Sicherheitsmassnahmen implementieren</td><td>Kundendaten unverschlüsselt auf Laptop</td></tr>
+      <tr><td><strong>7</strong></td><td><strong>Rechenschaftspflicht</strong></td><td>Nachweisen können dass alle Prinzipien eingehalten werden</td><td>Kein Verarbeitungsverzeichnis, keine Schulungsnachweise</td></tr>
+    </table></div>
+  </div>
+  <div class="sec">
+    <h2>Zweckbindung in der Praxis</h2>
+    <p>Wenn Sie Daten für Zweck A erhoben haben, dürfen Sie diese nicht einfach für Zweck B nutzen. Ausnahmen: Zweck B ist mit Zweck A kompatibel, oder Sie haben eine neue Rechtsgrundlage.</p>
+    <div class="case-box">
+      <div class="case-title">🔍 Praxisfall</div>
+      <div class="case-q">Sie haben eine Kundendatenbank für Vertragsabwicklung. Ihr Marketingteam fragt ob es diese Daten für ein Gewinnspiel nutzen darf. Ist das erlaubt?</div>
+      <button class="case-reveal" onclick="reveal(this)">Antwort anzeigen</button>
+      <div class="case-answer">Nein — nicht automatisch. Vertragsabwicklung und Gewinnspiel sind unterschiedliche Zwecke. Das Marketing braucht eine eigene Rechtsgrundlage, typischerweise eine neue Einwilligung der Kunden für den Gewinnspiel-Zweck.</div>
+    </div>
+  </div>
+  <div class="quiz-wrap">
+    <div class="quiz-title">📋 Wissenscheck M04</div>
+    <div class="qb"><div class="qt">1. Sie erheben Kundendaten für die Rechnungsstellung. Dürfen Sie diese für Werbe-E-Mails nutzen?</div>
+      <div class="qo"><label><input type="radio" name="m04q1" value="a"> Ja, Kunden haben zugestimmt als sie Kunden wurden</label>
+      <label><input type="radio" name="m04q1" value="b"> Nein — Rechnungsstellung und Werbung sind unterschiedliche Zwecke. Neue Rechtsgrundlage nötig.</label>
+      <label><input type="radio" name="m04q1" value="c"> Ja, solange Daten nicht weitergegeben werden</label></div>
+      <div class="qfb" id="m04q1f"></div></div>
+    <div class="qb"><div class="qt">2. Welches Prinzip sagt: "Nur die Daten erheben die wirklich nötig sind"?</div>
+      <div class="qo"><label><input type="radio" name="m04q2" value="a"> Zweckbindung</label>
+      <label><input type="radio" name="m04q2" value="b"> Datenminimierung</label>
+      <label><input type="radio" name="m04q2" value="c"> Integrität</label></div>
+      <div class="qfb" id="m04q2f"></div></div>
+    <button class="qsub" onclick="chk('m04',['b','b'])">Antworten prüfen</button>
+    <div class="qres" id="m04res"></div>
+    <button class="nxt-btn" id="m04nxt" onclick="nxt('m04','m05')">Weiter: M05 Rechtsgrundlagen →</button>
+  </div>
+</div>
+
+<!-- M05 -->
+<div class="mod" id="m05">
+  <div class="mhdr">
+    <div class="mh-code">MODUL M05 · ~12 Minuten</div>
+    <div class="mh-title">Rechtsgrundlagen</div>
+    <div class="mh-sub">Wann darf man Daten verarbeiten? Die 6 Rechtsgrundlagen erklärt</div>
+    <div class="mh-tags"><span class="mtag">👥 Alle</span><span class="mtag">🌍 Alle Länder</span><span class="mtag">⚖️ Art. 6 DSGVO / Art. 31 nDSG</span></div>
+  </div>
+  <div class="sec">
+    <h2>Grundsatz: Verboten mit Erlaubnisvorbehalt</h2>
+    <p>Datenschutzrecht funktioniert nach dem Prinzip: Verarbeitung von Personendaten ist <strong>verboten, ausser es gibt eine Rechtsgrundlage</strong>. Ohne Rechtsgrundlage = rechtswidrig.</p>
+    <div class="tw"><table>
+      <tr><th>Rechtsgrundlage</th><th>Wann passend</th><th>Typische Fälle</th><th>Falle</th></tr>
+      <tr><td><strong>1. Einwilligung</strong></td><td>Freiwillig, informiert, eindeutig, widerrufbar</td><td>Newsletter, Cookies, Fotos</td><td>Im Arbeitsverhältnis oft nicht freiwillig!</td></tr>
+      <tr><td><strong>2. Vertragserfüllung</strong></td><td>Notwendig zur Vertragsabwicklung</td><td>Lieferadresse, Lohnzahlung, Kundenkonto</td><td>Darf nicht ausgedehnt werden</td></tr>
+      <tr><td><strong>3. Gesetzliche Pflicht</strong></td><td>Gesetz schreibt Verarbeitung vor</td><td>Buchführung, Meldewesen, AML</td><td>Nur was das Gesetz verlangt</td></tr>
+      <tr><td><strong>4. Lebenswichtige Interessen</strong></td><td>Notfall, Gefahr für Leben</td><td>Medizinischer Notfall</td><td>Sehr eng auszulegen</td></tr>
+      <tr><td><strong>5. Öffentliches Interesse</strong></td><td>Behörden, öffentliche Aufgaben</td><td>Volksschulen, Behörden</td><td>Selten für private Unternehmen</td></tr>
+      <tr><td><strong>6. Berechtigtes Interesse</strong></td><td>Unternehmensinteresse überwiegt Betroffeneninteresse</td><td>IT-Sicherheit, direkte Werbung, interne Analyse</td><td>Interessenabwägung zwingend dokumentieren</td></tr>
+    </table></div>
+  </div>
+  <div class="sec">
+    <h2>Berechtigtes Interesse — die komplexeste Grundlage</h2>
+    <p>Art. 6 Abs. 1 lit. f DSGVO. Drei Bedingungen müssen alle erfüllt sein:</p>
+    <ol>
+      <li>Es gibt ein <strong>berechtigtes Interesse</strong> des Verantwortlichen oder eines Dritten</li>
+      <li>Die Verarbeitung ist zur Wahrung dieses Interesses <strong>notwendig</strong></li>
+      <li>Die Interessen der betroffenen Person überwiegen <strong>nicht</strong></li>
+    </ol>
+    <div class="wb">Eine Interessenabwägung muss <strong>schriftlich dokumentiert</strong> werden. "Es ist unser berechtigtes Interesse" ohne Abwägung ist kein valides Argument gegenüber Behörden.</div>
+  </div>
+  <div class="sec">
+    <h2>Praxisfall</h2>
+    <div class="case-box">
+      <div class="case-title">🔍 Praxisfall</div>
+      <div class="case-q">Ihr Unternehmen will Mitarbeitenden-E-Mails nach dem Austritt noch 6 Monate überwachen um potenzielle Datenlecks zu erkennen. Welche Rechtsgrundlage würden Sie wählen?</div>
+      <button class="case-reveal" onclick="reveal(this)">Antwort anzeigen</button>
+      <div class="case-answer">Potenziell "Berechtigtes Interesse" (IT-Sicherheit). Aber: Einwilligung scheidet im Arbeitsverhältnis oft aus. Eine Interessenabwägung ist zwingend — das Sicherheitsinteresse des Unternehmens vs. das Persönlichkeitsrecht des ausgetretenen Mitarbeiters. Ergebnis ist nicht eindeutig, rechtliche Beratung empfohlen. Alternativen wie technische Lösung (keine E-Mails nach Austritt weiterleiten) sind datenschutzfreundlicher.</div>
+    </div>
+  </div>
+  <div class="quiz-wrap">
+    <div class="quiz-title">📋 Wissenscheck M05</div>
+    <div class="qb"><div class="qt">1. Welche Rechtsgrundlage gilt für die Lohnabrechnung Ihrer Mitarbeitenden?</div>
+      <div class="qo"><label><input type="radio" name="m05q1" value="a"> Einwilligung</label>
+      <label><input type="radio" name="m05q1" value="b"> Vertragserfüllung</label>
+      <label><input type="radio" name="m05q1" value="c"> Berechtigtes Interesse</label></div>
+      <div class="qfb" id="m05q1f"></div></div>
+    <div class="qb"><div class="qt">2. Was ist beim berechtigten Interesse zwingend zu dokumentieren?</div>
+      <div class="qo"><label><input type="radio" name="m05q2" value="a"> Nur die Bezeichnung "berechtigtes Interesse"</label>
+      <label><input type="radio" name="m05q2" value="b"> Die Interessenabwägung zwischen Unternehmens- und Betroffeneninteressen</label>
+      <label><input type="radio" name="m05q2" value="c"> Ein Einwilligungsformular der Betroffenen</label></div>
+      <div class="qfb" id="m05q2f"></div></div>
+    <button class="qsub" onclick="chk('m05',['b','b'])">Antworten prüfen</button>
+    <div class="qres" id="m05res"></div>
+    <button class="nxt-btn" id="m05nxt" onclick="nxt('m05','m06')">Weiter: M06 Einwilligung →</button>
+  </div>
+</div>
+
+<!-- M06 -->
+<div class="mod" id="m06">
+  <div class="mhdr">
+    <div class="mh-code">MODUL M06 · ~10 Minuten</div>
+    <div class="mh-title">Einwilligung — und ihre Grenzen</div>
+    <div class="mh-sub">Wann ist Einwilligung valide? Einwilligung im Arbeitsverhältnis.</div>
+    <div class="mh-tags"><span class="mtag">👥 Alle</span><span class="mtag">🌍 Alle Länder</span><span class="mtag">⚖️ Art. 7 DSGVO / Art. 31 nDSG</span></div>
+  </div>
+  <div class="sec">
+    <h2>Anforderungen an eine gültige Einwilligung</h2>
+    <div class="tw"><table>
+      <tr><th>Anforderung</th><th>Was das bedeutet</th><th>Häufiger Fehler</th></tr>
+      <tr><td><strong>Freiwillig</strong></td><td>Keine Nachteile bei Ablehnung</td><td>Dienstleistung verweigern wenn keine Einwilligung</td></tr>
+      <tr><td><strong>Informiert</strong></td><td>Zweck, Verantwortlicher, Rechte müssen klar sein</td><td>Allgemeine "Ich stimme zu" Checkboxen</td></tr>
+      <tr><td><strong>Eindeutig / aktiv</strong></td><td>Aktive Handlung nötig (Klick, Unterschrift)</td><td>Vorausgewählte Checkboxen</td></tr>
+      <tr><td><strong>Spezifisch</strong></td><td>Für jeden Zweck separat</td><td>Gebündelt mit AGB</td></tr>
+      <tr><td><strong>Widerrufbar</strong></td><td>Jederzeit, genauso einfach wie Erteilung</td><td>Komplizierter Abmeldeweg</td></tr>
+      <tr><td><strong>Nachweisbar</strong></td><td>Datum, IP, Version dokumentiert</td><td>Kein Nachweis bei Streit</td></tr>
+    </table></div>
+  </div>
+  <div class="sec">
+    <h2>Einwilligung im Arbeitsverhältnis — besondere Vorsicht</h2>
+    <p>Das Machtungleichgewicht zwischen Arbeitgeber und Arbeitnehmer macht echte Freiwilligkeit schwierig. Ein Arbeitnehmer der "Nein" sagt hat möglicherweise Nachteile zu befürchten.</p>
+    <div class="wb"><strong>Faustregel:</strong> Einwilligung im Arbeitsverhältnis nur nutzen wenn der Arbeitnehmer einen echten Vorteil erhält (z.B. Foto im Intranet) und ablehnen wirklich keine Nachteile hat. Für alles Notwendige: Vertragserfüllung oder gesetzliche Pflicht nutzen.</div>
+    <div class="tw"><table>
+      <tr><th>Situation</th><th>Rechtsgrundlage</th><th>Einwilligung?</th></tr>
+      <tr><td>Lohnzahlung</td><td>Vertragserfüllung</td><td>❌ Nicht nötig</td></tr>
+      <tr><td>Arbeitszeiterfassung</td><td>Gesetzliche Pflicht</td><td>❌ Nicht nötig</td></tr>
+      <tr><td>Foto im Intranet</td><td>Einwilligung</td><td>✅ Freiwillig möglich</td></tr>
+      <tr><td>GPS-Tracking Mitarbeiterfahrzeug</td><td>Berechtigtes Interesse (+ Einschränkung nötig)</td><td>⚠️ Nicht als Hauptgrundlage</td></tr>
+    </table></div>
+  </div>
+  <div class="quiz-wrap">
+    <div class="quiz-title">📋 Wissenscheck M06</div>
+    <div class="qb"><div class="qt">1. Was macht eine vorausgewählte Checkbox bei einem Newsletter-Formular ungültig?</div>
+      <div class="qo"><label><input type="radio" name="m06q1" value="a"> Nichts, wenn der Nutzer sie abwählen kann</label>
+      <label><input type="radio" name="m06q1" value="b"> Fehlende aktive Handlung — Einwilligung muss aktiv erteilt werden</label>
+      <label><input type="radio" name="m06q1" value="c"> Das ist nur in Deutschland ein Problem</label></div>
+      <div class="qfb" id="m06q1f"></div></div>
+    <div class="qb"><div class="qt">2. Warum ist Einwilligung im Arbeitsverhältnis problematisch?</div>
+      <div class="qo"><label><input type="radio" name="m06q2" value="a"> Weil Arbeitnehmer kein Datenschutzrecht haben</label>
+      <label><input type="radio" name="m06q2" value="b"> Wegen des Machtungleichgewichts — echte Freiwilligkeit ist fraglich</label>
+      <label><input type="radio" name="m06q2" value="c"> Weil Arbeitnehmer nie einwilligen würden</label></div>
+      <div class="qfb" id="m06q2f"></div></div>
+    <button class="qsub" onclick="chk('m06',['b','b'])">Antworten prüfen</button>
+    <div class="qres" id="m06res"></div>
+    <button class="nxt-btn" id="m06nxt" onclick="nxt('m06','m07')">Weiter: M07 Minimierung & Need-to-Know →</button>
+  </div>
+</div>
+
+<!-- M07 -->
+<div class="mod" id="m07">
+  <div class="mhdr">
+    <div class="mh-code">MODUL M07 · ~10 Minuten</div>
+    <div class="mh-title">Datenminimierung & Need-to-Know</div>
+    <div class="mh-sub">Nur was nötig ist — am Arbeitsplatz und in der Technik</div>
+    <div class="mh-tags"><span class="mtag">👥 Alle</span><span class="mtag">🌍 Alle Länder</span></div>
+  </div>
+  <div class="sec">
+    <h2>1. Das Need-to-Know Prinzip</h2>
+    <p>Jeder Mitarbeitende darf nur die Personendaten einsehen die er für seine Aufgabe tatsächlich benötigt. "Ich könnte das vielleicht mal brauchen" ist kein Zugangsrecht.</p>
+    <div class="tw"><table>
+      <tr><th>Rolle</th><th>Zugang JA</th><th>Zugang NEIN</th></tr>
+      <tr><td>Verkaufsberater</td><td>Kontaktdaten, Kaufhistorie des eigenen Kunden</td><td>Bankdaten, Gesundheitsinfos, andere Kunden</td></tr>
+      <tr><td>HR-Sachbearbeiter</td><td>Lohn, Vertrag, Absenzen der zugewiesenen MA</td><td>Gesundheitsdiagnosen (nur Fähigkeit zur Arbeit relevant)</td></tr>
+      <tr><td>IT-Support</td><td>Systemzugänge wenn Support-Ticket vorliegt</td><td>E-Mail-Inhalte ohne konkreten Grund</td></tr>
+      <tr><td>Management</td><td>Aggregierte Berichte</td><td>Einzelne Mitarbeiter-Performance ohne Anlass</td></tr>
+    </table></div>
+  </div>
+  <div class="sec">
+    <h2>2. Datenminimierung in der Praxis</h2>
+    <ul>
+      <li><strong>Formulare:</strong> Nur Pflichtfelder die wirklich nötig sind. Kein "Nice to have".</li>
+      <li><strong>E-Mails:</strong> Keine Personendaten in CC wenn nicht nötig</li>
+      <li><strong>Excel-Sheets:</strong> Keine Spalten mit Personendaten die nicht verwendet werden</li>
+      <li><strong>Präsentationen:</strong> Echte Daten durch anonymisierte/fiktive ersetzen wenn möglich</li>
+      <li><strong>Besprechungen:</strong> Patientenname in Fallbesprechung wirklich nötig? Fallnummer reicht oft.</li>
+    </ul>
+    <div class="ob">Datenminimierung schützt auch das Unternehmen: Weniger Daten = kleinerer Schaden bei Datenpanne.</div>
+  </div>
+  <div class="sec">
+    <h2>3. Praxisfall</h2>
+    <div class="case-box">
+      <div class="case-title">🔍 Praxisfall</div>
+      <div class="case-q">Ein Mitarbeiter im Kundendienst sendet eine Kundenliste mit allen Daten (Name, E-Mail, Adresse, Kaufhistorie, Kreditlimit) per E-Mail an einen Kollegen, weil der "mal schauen will wie das aussieht". Probleme?</div>
+      <button class="case-reveal" onclick="reveal(this)">Antwort anzeigen</button>
+      <div class="case-answer">Mehrere: 1. Zweckbindung verletzt — "mal schauen" ist kein Verarbeitungszweck. 2. Need-to-Know verletzt — der Kollege hatte keinen Bedarf. 3. Potenziell Datenpanne wenn per unverschlüsselter E-Mail. 4. Kreditlimit könnte besondere Schutzbedürftigkeit auslösen. Lösung: Daten nur auf Anfrage mit klarem Zweck teilen, nur relevante Felder, intern über gesicherte Systeme.</div>
+    </div>
+  </div>
+  <div class="quiz-wrap">
+    <div class="quiz-title">📋 Wissenscheck M07</div>
+    <div class="qb"><div class="qt">1. Was bedeutet "Need-to-Know" am Arbeitsplatz?</div>
+      <div class="qo"><label><input type="radio" name="m07q1" value="a"> Alle Mitarbeitenden dürfen alle Daten einsehen</label>
+      <label><input type="radio" name="m07q1" value="b"> Jeder darf nur die Daten einsehen die er für seine konkrete Aufgabe benötigt</label>
+      <label><input type="radio" name="m07q1" value="c"> Management darf alle Daten jederzeit einsehen</label></div>
+      <div class="qfb" id="m07q1f"></div></div>
+    <div class="qb"><div class="qt">2. Ein Formular fragt nach Geburtsdatum obwohl nur die Volljährigkeit relevant ist. Was ist das Problem?</div>
+      <div class="qo"><label><input type="radio" name="m07q2" value="a"> Kein Problem, das Datum wird ja nicht gespeichert</label>
+      <label><input type="radio" name="m07q2" value="b"> Verstoss gegen Datenminimierung — ein Ja/Nein zur Volljährigkeit wäre ausreichend</label>
+      <label><input type="radio" name="m07q2" value="c"> Nur relevant wenn unter 18-Jährige das Formular nutzen</label></div>
+      <div class="qfb" id="m07q2f"></div></div>
+    <button class="qsub" onclick="chk('m07',['b','b'])">Antworten prüfen</button>
+    <div class="qres" id="m07res"></div>
+    <button class="nxt-btn" id="m07nxt" onclick="nxt('m07','m08')">Weiter: M08 Löschung & Fristen →</button>
+  </div>
+</div>
+
+<!-- M08 -->
+<div class="mod" id="m08">
+  <div class="mhdr">
+    <div class="mh-code">MODUL M08 · ~10 Minuten</div>
+    <div class="mh-title">Löschung & Aufbewahrungsfristen</div>
+    <div class="mh-sub">Wann müssen Daten weg? Aufbewahrungspflichten vs. Löschpflichten</div>
+    <div class="mh-tags"><span class="mtag">👥 Alle</span><span class="mtag">🌍 Alle Länder</span></div>
+  </div>
+  <div class="sec">
+    <h2>1. Die Grundregel: So kurz wie möglich</h2>
+    <p>Datenschutzrecht fordert: Daten nur so lange aufbewahren wie der Zweck es erfordert. Danach: löschen oder anonymisieren.</p>
+    <div class="wb"><strong>Aber Achtung:</strong> Andere Gesetze schreiben Aufbewahrung vor. Datenschutz und Aufbewahrungspflicht stehen manchmal in Spannung.</div>
+  </div>
+  <div class="sec">
+    <h2>2. Typische Aufbewahrungsfristen</h2>
+    <div class="tw"><table>
+      <tr><th>Datenkategorie</th><th>Typische Frist</th><th>Rechtsgrundlage</th></tr>
+      <tr><td>Buchführungsbelege, Rechnungen</td><td>10 Jahre</td><td>Gesetzliche Pflicht (OR/HGB/Companies Act)</td></tr>
+      <tr><td>Arbeitsverträge, Lohnunterlagen</td><td>10 Jahre nach Austritt</td><td>Sozialversicherung, Steuerrecht</td></tr>
+      <tr><td>Abgelehnte Bewerbungen</td><td>Max. 6 Monate</td><td>Diskriminierungsschutz (DSGVO)</td></tr>
+      <tr><td>Kundendaten nach Vertragsende</td><td>3–10 Jahre (Verjährung)</td><td>Vertraglicher Zweck</td></tr>
+      <tr><td>E-Mails mit Personendaten</td><td>Zweckgebunden (oft 1–3 Jahre)</td><td>Zweckbindungsprinzip</td></tr>
+      <tr><td>Website-Logs mit IP-Adressen</td><td>Max. 7 Tage (Empfehlung)</td><td>Datenminimierung</td></tr>
+      <tr><td>Cookie-Einwilligungen</td><td>3 Jahre (Nachweis)</td><td>Rechenschaftspflicht</td></tr>
+    </table></div>
+  </div>
+  <div class="sec">
+    <h2>3. Löschung in der Praxis</h2>
+    <ul>
+      <li><strong>Sicheres Löschen:</strong> "In den Papierkorb" reicht nicht. Dateivernichtung oder zertifiziertes Löschen</li>
+      <li><strong>Alle Kopien:</strong> Backups, Archiv, E-Mail-Anhänge, USB-Sticks</li>
+      <li><strong>Drittparteien informieren:</strong> Wenn Daten weitergegeben wurden — Löschung auch dort</li>
+      <li><strong>Dokumentation:</strong> Wann gelöscht, durch wen, welche Daten</li>
+    </ul>
+    <div class="ib">Wenn gesetzliche Aufbewahrungspflicht und Löschanfrage kollidieren: Aufbewahrungspflicht geht vor — aber Betroffene muss informiert werden und Verarbeitung soll auf das Minimum beschränkt werden.</div>
+  </div>
+  <div class="quiz-wrap">
+    <div class="quiz-title">📋 Wissenscheck M08</div>
+    <div class="qb"><div class="qt">1. Ein abgelehnter Bewerber fordert Löschung seiner Daten. Wann muss spätestens gelöscht werden?</div>
+      <div class="qo"><label><input type="radio" name="m08q1" value="a"> Nach 2 Jahren</label>
+      <label><input type="radio" name="m08q1" value="b"> Nach 6 Monaten ab Absage</label>
+      <label><input type="radio" name="m08q1" value="c"> Sofort nach Anfrage</label></div>
+      <div class="qfb" id="m08q1f"></div></div>
+    <div class="qb"><div class="qt">2. Rechnungen müssen wie lange aufbewahrt werden?</div>
+      <div class="qo"><label><input type="radio" name="m08q2" value="a"> 3 Jahre</label>
+      <label><input type="radio" name="m08q2" value="b"> 5 Jahre</label>
+      <label><input type="radio" name="m08q2" value="c"> 10 Jahre (gesetzliche Buchführungspflicht)</label></div>
+      <div class="qfb" id="m08q2f"></div></div>
+    <button class="qsub" onclick="chk('m08',['b','c'])">Antworten prüfen</button>
+    <div class="qres" id="m08res"></div>
+    <button class="nxt-btn" id="m08nxt" onclick="nxt('m08','m09')">Weiter: M09 Verarbeitungsverzeichnis →</button>
+  </div>
+</div>
+
+<!-- M09 -->
+<div class="mod" id="m09">
+  <div class="mhdr">
+    <div class="mh-code">MODUL M09 · ~10 Minuten</div>
+    <div class="mh-title">Das Verarbeitungsverzeichnis (VVT)</div>
+    <div class="mh-sub">Was ist es? Wer ist verantwortlich? Wann muss es aktualisiert werden?</div>
+    <div class="mh-tags"><span class="mtag">👥 Alle, besonders Process Owner</span><span class="mtag">⚖️ Art. 30 DSGVO / Art. 12 nDSG / UK GDPR Art. 30</span></div>
+  </div>
+  <div class="sec">
+    <h2>1. Was ist das Verarbeitungsverzeichnis?</h2>
+    <p>Das Verarbeitungsverzeichnis (Record of Processing Activities / ROPA) ist eine dokumentierte Übersicht aller Tätigkeiten im Unternehmen bei denen Personendaten verarbeitet werden. Es ist die Grundlage für alle Datenschutzpflichten.</p>
+    <div class="ib"><strong>Pflicht:</strong> DSGVO Art. 30 — für fast alle Unternehmen. nDSG Art. 12 — Schweiz. UK GDPR Art. 30 — UK. Ausnahme DSGVO: Unternehmen <250 MA wenn nur gelegentliche Verarbeitung ohne Risiko — in der Praxis gilt es für fast alle.</div>
+  </div>
+  <div class="sec">
+    <h2>2. Was muss dokumentiert werden?</h2>
+    <div class="tw"><table>
+      <tr><th>Pflichtangabe</th><th>Beispiel</th></tr>
+      <tr><td>Name des Verantwortlichen</td><td>Musterfirma AG, Max Muster (DPO)</td></tr>
+      <tr><td>Zweck der Verarbeitung</td><td>Lohnabrechnung, Kundenverwaltung, Newsletter</td></tr>
+      <tr><td>Kategorien betroffener Personen</td><td>Mitarbeitende, Kunden, Interessenten</td></tr>
+      <tr><td>Kategorien der Personendaten</td><td>Name, E-Mail, Lohndaten, Kaufhistorie</td></tr>
+      <tr><td>Empfänger (auch Drittländer)</td><td>Lohnbüro CH, Cloud-Anbieter USA</td></tr>
+      <tr><td>Aufbewahrungsfristen</td><td>Lohndaten 10 Jahre, Bewerbungen 6 Monate</td></tr>
+      <tr><td>Technische Sicherheitsmassnahmen</td><td>Verschlüsselung, Zugriffsrechte, Backup</td></tr>
+    </table></div>
+  </div>
+  <div class="sec">
+    <h2>3. Wer ist verantwortlich? — Nicht nur der DPO!</h2>
+    <p><strong>Der DPO (Datenschutzbeauftragter) ist nicht allein verantwortlich.</strong> Der DPO koordiniert und berät — aber jeder Process Owner (Abteilungsleiter, Projektverantwortlicher) ist verantwortlich für seine Prozesse im VVT.</p>
+    <div class="wb"><strong>Ihre Pflicht als Mitarbeitender:</strong> Wenn Sie einen neuen Prozess starten der Personendaten verarbeitet — melden Sie das dem DPO / Datenschutzteam damit das VVT aktualisiert werden kann.</div>
+    <div class="tw"><table>
+      <tr><th>Beispiele für meldepflichtige neue Prozesse</th></tr>
+      <tr><td>Einführung eines neuen CRM-Systems</td></tr>
+      <tr><td>Start eines Newsletters oder einer Marketingkampagne</td></tr>
+      <tr><td>Neues HR-Tool mit Mitarbeiterdaten</td></tr>
+      <tr><td>Kundenbefragung / Umfrage</td></tr>
+      <tr><td>Video-Überwachung im Büro</td></tr>
+      <tr><td>Integration eines neuen KI-Tools (Copilot, ChatGPT API, etc.)</td></tr>
+    </table></div>
+  </div>
+  <div class="quiz-wrap">
+    <div class="quiz-title">📋 Wissenscheck M09</div>
+    <div class="qb"><div class="qt">1. Ihre Abteilung führt ein neues SaaS-Tool ein das Kundendaten verarbeitet. Was müssen Sie tun?</div>
+      <div class="qo"><label><input type="radio" name="m09q1" value="a"> Nichts — das ist Sache des DPO</label>
+      <label><input type="radio" name="m09q1" value="b"> Den DPO / Datenschutzteam informieren damit das VVT aktualisiert und ein AVV geprüft wird</label>
+      <label><input type="radio" name="m09q1" value="c"> Abwarten bis die jährliche Datenschutzprüfung kommt</label></div>
+      <div class="qfb" id="m09q1f"></div></div>
+    <div class="qb"><div class="qt">2. Wer trägt die Verantwortung für die Richtigkeit des Verarbeitungsverzeichnisses?</div>
+      <div class="qo"><label><input type="radio" name="m09q2" value="a"> Allein der DPO</label>
+      <label><input type="radio" name="m09q2" value="b"> Nur die IT-Abteilung</label>
+      <label><input type="radio" name="m09q2" value="c"> Das Management als Verantwortlicher, unterstützt durch Process Owner und DPO</label></div>
+      <div class="qfb" id="m09q2f"></div></div>
+    <button class="qsub" onclick="chk('m09',['b','c'])">Antworten prüfen</button>
+    <div class="qres" id="m09res"></div>
+    <button class="nxt-btn" id="m09nxt" onclick="nxt('m09','m10')">Weiter: M10 Informationspflichten →</button>
+  </div>
+</div>
+
+<!-- M10 -->
+<div class="mod" id="m10">
+  <div class="mhdr">
+    <div class="mh-code">MODUL M10 · ~10 Minuten</div>
+    <div class="mh-title">Informationspflichten & Datenschutzerklärung</div>
+    <div class="mh-sub">Wer muss wen wann worüber informieren?</div>
+    <div class="mh-tags"><span class="mtag">👥 Alle</span><span class="mtag">⚖️ Art. 13/14 DSGVO / Art. 19 nDSG</span></div>
+  </div>
+  <div class="sec">
+    <h2>1. Grundsatz: Transparenz zuerst</h2>
+    <p>Bevor oder spätestens zum Zeitpunkt der Erhebung müssen Betroffene informiert werden. Nicht nachher. Nicht auf Anfrage. Sondern aktiv, verständlich, vollständig.</p>
+  </div>
+  <div class="sec">
+    <h2>2. Was muss kommuniziert werden?</h2>
+    <div class="tw"><table>
+      <tr><th>Pflichtinhalt</th><th>Typische Form</th></tr>
+      <tr><td>Wer ist Verantwortlicher (Name, Kontakt)</td><td>Datenschutzerklärung auf Website</td></tr>
+      <tr><td>Kontakt DPO / Datenschutzberater</td><td>Datenschutzerklärung</td></tr>
+      <tr><td>Zweck der Verarbeitung</td><td>Datenschutzerklärung / Formularhinweis</td></tr>
+      <tr><td>Rechtsgrundlage</td><td>Datenschutzerklärung</td></tr>
+      <tr><td>Empfänger / Drittländer</td><td>Datenschutzerklärung</td></tr>
+      <tr><td>Aufbewahrungsdauer</td><td>Datenschutzerklärung</td></tr>
+      <tr><td>Betroffenenrechte (Auskunft, Löschung etc.)</td><td>Datenschutzerklärung</td></tr>
+      <tr><td>Beschwerderecht bei Behörde</td><td>Datenschutzerklärung</td></tr>
+    </table></div>
+  </div>
+  <div class="sec">
+    <h2>3. Information VOR der Einwilligung</h2>
+    <p>Einwilligung kann nur gültig sein wenn die Person vorher informiert wurde. Reihenfolge: erst informieren, dann um Einwilligung bitten.</p>
+    <div class="rb">❌ Falsch: Newsletter-Checkbox ohne Hinweis was die Einwilligung umfasst.<br>✅ Richtig: "Ich möchte den Newsletter erhalten. [Link zur Datenschutzerklärung] — ich kann mich jederzeit abmelden."</div>
+  </div>
+  <div class="sec">
+    <h2>4. Mitarbeitende informieren</h2>
+    <p>Auch Mitarbeitende haben ein Recht auf Information über die Verarbeitung ihrer Daten. Eine Mitarbeiter-Datenschutzerklärung (Employee Privacy Notice) ist bei Stellenantritt auszuhändigen.</p>
+    <div class="ib">Tipp: Mitarbeitende bei Onboarding schriftlich informieren und Bestätigung des Erhalts dokumentieren.</div>
+  </div>
+  <div class="quiz-wrap">
+    <div class="quiz-title">📋 Wissenscheck M10</div>
+    <div class="qb"><div class="qt">1. Wann müssen Betroffene über die Datenverarbeitung informiert werden?</div>
+      <div class="qo"><label><input type="radio" name="m10q1" value="a"> Auf Anfrage der betroffenen Person</label>
+      <label><input type="radio" name="m10q1" value="b"> Bei oder vor Erhebung der Daten — aktiv und proaktiv</label>
+      <label><input type="radio" name="m10q1" value="c"> Erst bei einer Datenpanne</label></div>
+      <div class="qfb" id="m10q1f"></div></div>
+    <div class="qb"><div class="qt">2. Was muss eine gültige Einwilligung voraussetzen?</div>
+      <div class="qo"><label><input type="radio" name="m10q2" value="a"> Nur einen Klick auf "Ich stimme zu"</label>
+      <label><input type="radio" name="m10q2" value="b"> Vorangehende, verständliche Information über Zweck und Umfang</label>
+      <label><input type="radio" name="m10q2" value="c"> Eine Unterschrift auf Papier</label></div>
+      <div class="qfb" id="m10q2f"></div></div>
+    <button class="qsub" onclick="chk('m10',['b','b'])">Antworten prüfen</button>
+    <div class="qres" id="m10res"></div>
+    <button class="nxt-btn" id="m10nxt" onclick="nxt('m10','m11')">Weiter: M11 Verantwortung & DPO →</button>
+  </div>
+</div>
+
+<!-- M11 -->
+<div class="mod" id="m11">
+  <div class="mhdr">
+    <div class="mh-code">MODUL M11 · ~10 Minuten</div>
+    <div class="mh-title">Wer trägt die Verantwortung?</div>
+    <div class="mh-sub">Controller · DPO · Process Owner — Rollen und Verantwortlichkeiten</div>
+    <div class="mh-tags"><span class="mtag">👥 Alle</span><span class="mtag">⚖️ Art. 37–39 DSGVO / Art. 10 nDSG</span></div>
+  </div>
+  <div class="sec">
+    <h2>1. Der Verantwortliche (Controller)</h2>
+    <p>Das <strong>Unternehmen</strong> ist der Hauptverantwortliche. Es entscheidet über Zweck und Mittel der Datenverarbeitung und haftet für die Einhaltung aller Datenschutzpflichten.</p>
+    <div class="ib">Verantwortung kann nicht auf den DPO delegiert werden. Der DPO berät — die Verantwortung bleibt beim Management.</div>
+  </div>
+  <div class="sec">
+    <h2>2. Der DPO / Datenschutzberater — was er ist und was nicht</h2>
+    <div class="tw"><table>
+      <tr><th>DPO IST:</th><th>DPO IST NICHT:</th></tr>
+      <tr><td>Berater und interner Auditor</td><td>Allein verantwortlich für Compliance</td></tr>
+      <tr><td>Anlaufstelle für Behörden und Betroffene</td><td>Sündenbock bei Verstössen</td></tr>
+      <tr><td>Schulungskoordinator</td><td>Entscheider über Datenverarbeitungen</td></tr>
+      <tr><td>Unabhängig — keine Weisungsgebundenheit</td><td>Operativer Datenschutzumsetzer</td></tr>
+    </table></div>
+    <div class="jb-wrap"><span class="jb jb-eu">EU DSGVO</span><span class="jb jb-uk">UK GDPR</span></div>
+    <p>DPO Pflicht wenn: öffentliche Stelle, oder umfangreiche systematische Überwachung, oder besondere Datenkategorien grossmassstäblich verarbeitet.</p>
+    <div class="jb-wrap"><span class="jb jb-ch">CH nDSG</span></div>
+    <p>Kein Pflicht-DSB in der Schweiz. Aber: Datenschutzberater (DSB) freiwillig ernennen reduziert Risiken und vereinfacht EDÖB-Kommunikation.</p>
+  </div>
+  <div class="sec">
+    <h2>3. Der Process Owner — Ihre Rolle</h2>
+    <p>Jeder Mitarbeitende der Prozesse mit Personendaten verantwortet ist ein Process Owner mit Datenschutzverantwortung:</p>
+    <ul>
+      <li>Neue Verarbeitungen dem DPO melden</li>
+      <li>Datenschutzfreundliche Standardeinstellungen wählen</li>
+      <li>Lieferanten nur mit AVV nutzen</li>
+      <li>Datenpannen sofort intern melden</li>
+      <li>Schulungen absolvieren und dokumentieren</li>
+    </ul>
+  </div>
+  <div class="quiz-wrap">
+    <div class="quiz-title">📋 Wissenscheck M11</div>
+    <div class="qb"><div class="qt">1. Eine Datenpanne passiert. Wer ist hauptverantwortlich?</div>
+      <div class="qo"><label><input type="radio" name="m11q1" value="a"> Der DPO allein</label>
+      <label><input type="radio" name="m11q1" value="b"> Das Unternehmen (Verantwortlicher / Controller) und sein Management</label>
+      <label><input type="radio" name="m11q1" value="c"> Der betroffene Mitarbeiter der den Fehler gemacht hat</label></div>
+      <div class="qfb" id="m11q1f"></div></div>
+    <div class="qb"><div class="qt">2. Ist ein DPO in der Schweiz (nDSG) Pflicht?</div>
+      <div class="qo"><label><input type="radio" name="m11q2" value="a"> Ja, für alle Unternehmen</label>
+      <label><input type="radio" name="m11q2" value="b"> Nein — kein Pflicht-DSB, aber empfohlen</label>
+      <label><input type="radio" name="m11q2" value="c"> Nur für Unternehmen über 250 Mitarbeitende</label></div>
+      <div class="qfb" id="m11q2f"></div></div>
+    <button class="qsub" onclick="chk('m11',['b','b'])">Antworten prüfen</button>
+    <div class="qres" id="m11res"></div>
+    <button class="nxt-btn" id="m11nxt" onclick="nxt('m11','m12')">Weiter: M12 Datenpannen →</button>
+  </div>
+</div>
+
+<!-- M12 -->
+<div class="mod" id="m12">
+  <div class="mhdr">
+    <div class="mh-code">MODUL M12 · ~12 Minuten</div>
+    <div class="mh-title">Datenpannen erkennen und melden</div>
+    <div class="mh-sub">72-Stunden-Frist, interne Meldewege, was ist meldepflichtig?</div>
+    <div class="mh-tags"><span class="mtag">👥 Alle</span><span class="mtag">⚖️ Art. 33/34 DSGVO / Art. 24 nDSG</span></div>
+  </div>
+  <div class="sec">
+    <h2>1. Was ist eine Datenpanne?</h2>
+    <p>Jede Verletzung der Sicherheit die zur versehentlichen oder rechtswidrigen Vernichtung, zum Verlust, zur Veränderung, unbefugten Offenlegung oder unbefugtem Zugang zu Personendaten führt.</p>
+    <div class="tw"><table>
+      <tr><th>Beispiele für Datenpannen</th><th>Panne?</th></tr>
+      <tr><td>Laptop mit Kundendaten gestohlen (unverschlüsselt)</td><td>✅ Ja — meldepflichtig</td></tr>
+      <tr><td>E-Mail mit Kundenliste an falschen Empfänger</td><td>✅ Ja — prüfen ob meldepflichtig</td></tr>
+      <tr><td>Ransomware-Angriff auf Server mit Personendaten</td><td>✅ Ja — wahrscheinlich meldepflichtig</td></tr>
+      <tr><td>Laptop gestohlen, vollverschlüsselt, kein Datenzugang möglich</td><td>⚠️ Panne ja, aber ggf. nicht meldepflichtig</td></tr>
+      <tr><td>Internes Dokument versehentlich gelöscht, Backup vorhanden</td><td>⚠️ Prüfen — oft nicht meldepflichtig</td></tr>
+    </table></div>
+  </div>
+  <div class="sec">
+    <h2>2. Die 72-Stunden-Frist</h2>
+    <div class="jb-wrap"><span class="jb jb-eu">EU DSGVO</span><span class="jb jb-uk">UK GDPR</span></div>
+    <p>Meldung an Aufsichtsbehörde <strong>innerhalb 72 Stunden</strong> nach Bekanntwerden — wenn Risiko für Betroffene besteht. Die Frist läuft ab dem Moment wo das Unternehmen von der Panne weiss.</p>
+    <div class="jb-wrap"><span class="jb jb-ch">CH nDSG</span></div>
+    <p>Meldung an EDÖB <strong>so rasch wie möglich</strong> — Art. 24 nDSG gilt ab September 2023. Hohe Risikopannen müssen unverzüglich gemeldet werden.</p>
+    <div class="rb"><strong>Was viele nicht wissen:</strong> Die Frist beginnt wenn das Unternehmen die Panne entdeckt — nicht wenn die IT-Abteilung sie dokumentiert hat. Langsame interne Meldewege = Frist gerissen.</div>
+  </div>
+  <div class="sec">
+    <h2>3. Ihr Meldeprozess</h2>
+    <ol>
+      <li><strong>Sofort intern melden</strong> — an DPO / Datenschutzteam, auch wenn unsicher</li>
+      <li><strong>Nicht selbst handeln</strong> — keine Kommunikation nach aussen ohne DPO-Freigabe</li>
+      <li><strong>Dokumentieren</strong> — was ist passiert, wann, wer weiss es, welche Daten betroffen</li>
+      <li><strong>DPO bewertet</strong> — Meldepflicht an Behörde? Benachrichtigung Betroffener?</li>
+    </ol>
+    <div class="wb"><strong>Lieber zu früh melden als zu spät.</strong> Eine interne Meldung die sich als nicht meldepflichtig herausstellt schadet nichts. Eine nicht gemeldete meldepflichtige Panne kann CHF 250'000 / €20 Mio kosten.</div>
+  </div>
+  <div class="quiz-wrap">
+    <div class="quiz-title">📋 Wissenscheck M12</div>
+    <div class="qb"><div class="qt">1. Ein Mitarbeiter sendet versehentlich eine Kundenliste an externe Empfänger. Was tun?</div>
+      <div class="qo"><label><input type="radio" name="m12q1" value="a"> Abwarten und hoffen dass es niemand bemerkt</label>
+      <label><input type="radio" name="m12q1" value="b"> Sofort den DPO / Datenschutzteam informieren</label>
+      <label><input type="radio" name="m12q1" value="c"> Die Empfänger bitten die E-Mail zu löschen und den Vorfall intern als erledigt vermerken</label></div>
+      <div class="qfb" id="m12q1f"></div></div>
+    <div class="qb"><div class="qt">2. Ab wann läuft die 72-Stunden-Meldepflicht unter der DSGVO?</div>
+      <div class="qo"><label><input type="radio" name="m12q2" value="a"> Ab dem Zeitpunkt der Datenpanne</label>
+      <label><input type="radio" name="m12q2" value="b"> Ab dem Zeitpunkt wo das Unternehmen von der Panne weiss (Bekanntwerden)</label>
+      <label><input type="radio" name="m12q2" value="c"> Ab dem Zeitpunkt der vollständigen internen Dokumentation</label></div>
+      <div class="qfb" id="m12q2f"></div></div>
+    <button class="qsub" onclick="chk('m12',['b','b'])">Antworten prüfen</button>
+    <div class="qres" id="m12res"></div>
+    <button class="nxt-btn" id="m12nxt" onclick="nxt('m12','m13')">Weiter: M13 Sanktionen & Praxisfälle →</button>
+  </div>
+</div>
+
+<!-- M13 -->
+<div class="mod" id="m13">
+  <div class="mhdr">
+    <div class="mh-code">MODUL M13 · ~12 Minuten</div>
+    <div class="mh-title">Sanktionen & Praxisfälle</div>
+    <div class="mh-sub">Was kostet Datenschutz-Verstoss? Reale Fälle aus der Praxis.</div>
+    <div class="mh-tags"><span class="mtag">👥 Alle</span><span class="mtag">🌍 Alle Länder</span></div>
+  </div>
+  <div class="sec">
+    <h2>1. Sanktionen nach Jurisdiktion</h2>
+    <div class="tw"><table>
+      <tr><th>Gesetz</th><th>Max. Sanktion</th><th>Besonderheit</th></tr>
+      <tr><td><span class="jb jb-eu">EU DSGVO</span></td><td>€20 Mio oder 4% globaler Umsatz (was höher)</td><td>Behörden können auch ohne Schaden bussen</td></tr>
+      <tr><td><span class="jb jb-ch">CH nDSG</span></td><td>CHF 250'000 — Personalstrafe</td><td>Strafbar ist die natürliche Person (Manager, DPO) nicht das Unternehmen!</td></tr>
+      <tr><td><span class="jb jb-uk">UK GDPR</span></td><td>£17.5 Mio oder 4% globaler Umsatz</td><td>ICO verhängt auch gegen Privatpersonen</td></tr>
+      <tr><td><span class="jb jb-us">CCPA/CPRA</span></td><td>$7'500/intentialer Verstoss, $2'500/fahrlässig</td><td>Auch Klassen-Sammelklagen möglich</td></tr>
+      <tr><td><span class="jb jb-cn">PIPL China</span></td><td>CNY 50 Mio / 5% Jahresumsatz</td><td>Plattformsperren möglich</td></tr>
+    </table></div>
+    <div class="rb"><strong>nDSG-Besonderheit:</strong> In der Schweiz wird die natürliche Person bestraft — nicht das Unternehmen. D.h. der Geschäftsführer, der DPO oder der verantwortliche Manager können persönlich mit bis zu CHF 250'000 gebüsst werden.</div>
+  </div>
+  <div class="sec">
+    <h2>2. Reale Bussgeldfälle</h2>
+    <div class="tw"><table>
+      <tr><th>Fall</th><th>Busse</th><th>Grund</th></tr>
+      <tr><td>Meta (Facebook) — Irland 2023</td><td>€1.2 Mrd</td><td>Unzulässige Datentransfers EU→USA</td></tr>
+      <tr><td>Amazon — Luxemburg 2021</td><td>€746 Mio</td><td>Cookie-Consent-Verstösse</td></tr>
+      <tr><td>Google — Frankreich 2022</td><td>€150 Mio</td><td>Ablehnen von Cookies zu schwierig</td></tr>
+      <tr><td>H&M — Deutschland 2020</td><td>€35 Mio</td><td>Unzulässige Mitarbeiterüberwachung</td></tr>
+      <tr><td>Schweizer Postdienstleister 2024</td><td>CHF 80'000</td><td>Unzureichende Datensicherheit</td></tr>
+    </table></div>
+  </div>
+  <div class="sec">
+    <h2>3. Praxisfälle — Was hätten Sie getan?</h2>
+    <div class="case-box">
+      <div class="case-title">🔍 Fall 1: Der vergessene USB-Stick</div>
+      <div class="case-q">Ein Mitarbeiter verliert einen USB-Stick mit 5'000 Kundendatensätzen (Namen, E-Mails, Kaufhistorie). Stick war nicht verschlüsselt. Was muss das Unternehmen tun?</div>
+      <button class="case-reveal" onclick="reveal(this)">Antwort anzeigen</button>
+      <div class="case-answer">1. Interne Meldung sofort. 2. Datenpanne dokumentieren. 3. Behördenentscheid: Hohes Risiko → Meldung an Aufsichtsbehörde innerhalb 72h (DSGVO) / so rasch wie möglich (nDSG). 4. Betroffene informieren wenn hohes Risiko für ihre Rechte. 5. Massnahme: USB-Sticks künftig verschlüsseln oder verbieten. Lehre: Verschlüsselung hätte die Meldepflicht möglicherweise entfallen lassen.</div>
+    </div>
+    <div class="case-box" style="margin-top:10px;">
+      <div class="case-title">🔍 Fall 2: Der Einkäufer und das neue Tool</div>
+      <div class="case-q">Ihre Einkaufsabteilung führt ohne Rücksprache ein neues Lieferantenportal ein. Das Portal läuft beim US-Anbieter SoftCorp Inc., der kein DPF-zertifiziert ist. Lieferanten (natürliche Personen) müssen sich registrieren. Was ist schiefgelaufen?</div>
+      <button class="case-reveal" onclick="reveal(this)">Antwort anzeigen</button>
+      <div class="case-answer">Mehrere Verstösse: 1. Kein AVV mit SoftCorp abgeschlossen (Art. 28 DSGVO). 2. Kein TIA für den Transfer EU→USA (Schrems II). 3. Keine Information der Lieferanten (Art. 13 DSGVO). 4. VVT nicht aktualisiert. Lösung: AVV nachholen, TIA erstellen, Datenschutzerklärung für das Portal ergänzen, VVT aktualisieren — und in Zukunft Datenschutz vor Einführung neuer Tools prüfen.</div>
+    </div>
+  </div>
+  <div class="quiz-wrap">
+    <div class="quiz-title">📋 Wissenscheck M13</div>
+    <div class="qb"><div class="qt">1. In der Schweiz (nDSG) — wer wird bei einem Datenschutzversoss gebüsst?</div>
+      <div class="qo"><label><input type="radio" name="m13q1" value="a"> Das Unternehmen — bis CHF 250'000</label>
+      <label><input type="radio" name="m13q1" value="b"> Die natürliche Person (Manager, DPO) — bis CHF 250'000</label>
+      <label><input type="radio" name="m13q1" value="c"> Nur der DPO</label></div>
+      <div class="qfb" id="m13q1f"></div></div>
+    <div class="qb"><div class="qt">2. Welcher der folgenden Verstösse führte zu einer EU-Busse?</div>
+      <div class="qo"><label><input type="radio" name="m13q2" value="a"> Zu langsame Beantwortung von Betroffenenanfragen</label>
+      <label><input type="radio" name="m13q2" value="b"> Unzulässige Datentransfers EU→USA (Meta, €1.2 Mrd)</label>
+      <label><input type="radio" name="m13q2" value="c"> Fehlende Datenschutzerklärung auf der Website</label></div>
+      <div class="qfb" id="m13q2f"></div></div>
+    <button class="qsub" onclick="chk('m13',['b','b'])">Antworten prüfen</button>
+    <div class="qres" id="m13res"></div>
+    <button class="nxt-btn" id="m13nxt" onclick="nxt('m13','mtest')">Zum Abschlusstest →</button>
+  </div>
+</div>
+
+<!-- ABSCHLUSSTEST -->
+<div class="mod" id="mtest">
+  <div class="mhdr">
+    <div class="mh-code">ABSCHLUSSTEST · 15 Fragen</div>
+    <div class="mh-title">Datenschutz Kernschulung — Abschlusstest</div>
+    <div class="mh-sub">Mindestens 80% (12/15) erforderlich für Zertifikat</div>
+    <div class="mh-tags"><span class="mtag">⏱ ~10 Minuten</span><span class="mtag">🎓 Zertifikat bei Bestehen</span></div>
+  </div>
+  <div class="quiz-wrap">
+    <div class="quiz-title">📋 Abschlusstest — alle Themen</div>
+    <div class="qb"><div class="qt">1. Was sind Personendaten?</div><div class="qo">
+      <label><input type="radio" name="tq1" value="a"> Nur Name und Adresse</label>
+      <label><input type="radio" name="tq1" value="b"> Alle Infos die eine natürliche Person identifizierbar machen</label>
+      <label><input type="radio" name="tq1" value="c"> Nur Daten in digitaler Form</label></div><div class="qfb" id="tq1f"></div></div>
+    <div class="qb"><div class="qt">2. Pseudonymisierte Daten unterliegen dem Datenschutzrecht.</div><div class="qo">
+      <label><input type="radio" name="tq2" value="a"> Falsch</label>
+      <label><input type="radio" name="tq2" value="b"> Richtig</label></div><div class="qfb" id="tq2f"></div></div>
+    <div class="qb"><div class="qt">3. Welches Prinzip sagt: Nur die Daten erheben die wirklich nötig sind?</div><div class="qo">
+      <label><input type="radio" name="tq3" value="a"> Zweckbindung</label>
+      <label><input type="radio" name="tq3" value="b"> Datenminimierung</label>
+      <label><input type="radio" name="tq3" value="c"> Rechenschaftspflicht</label></div><div class="qfb" id="tq3f"></div></div>
+    <div class="qb"><div class="qt">4. Für Lohnabrechnung von Mitarbeitenden — welche Rechtsgrundlage?</div><div class="qo">
+      <label><input type="radio" name="tq4" value="a"> Einwilligung</label>
+      <label><input type="radio" name="tq4" value="b"> Vertragserfüllung</label>
+      <label><input type="radio" name="tq4" value="c"> Berechtigtes Interesse</label></div><div class="qfb" id="tq4f"></div></div>
+    <div class="qb"><div class="qt">5. Einwilligung im Arbeitsverhältnis ist immer gültig wenn der Mitarbeiter unterschreibt.</div><div class="qo">
+      <label><input type="radio" name="tq5" value="a"> Richtig</label>
+      <label><input type="radio" name="tq5" value="b"> Falsch — Machtungleichgewicht macht echte Freiwilligkeit fraglich</label></div><div class="qfb" id="tq5f"></div></div>
+    <div class="qb"><div class="qt">6. DSGVO gilt für ein US-Unternehmen das in Deutsch wirbt und € Preise hat?</div><div class="qo">
+      <label><input type="radio" name="tq6" value="a"> Nein — nur für EU-Unternehmen</label>
+      <label><input type="radio" name="tq6" value="b"> Ja — Marktortprinzip (Art. 3 DSGVO)</label></div><div class="qfb" id="tq6f"></div></div>
+    <div class="qb"><div class="qt">7. Ihr Team führt ein neues CRM-System ein. Was müssen Sie tun?</div><div class="qo">
+      <label><input type="radio" name="tq7" value="a"> Nichts — das ist Aufgabe des DPO</label>
+      <label><input type="radio" name="tq7" value="b"> DPO informieren, AVV prüfen, VVT aktualisieren lassen</label>
+      <label><input type="radio" name="tq7" value="c"> Warten bis die Jahresrevision kommt</label></div><div class="qfb" id="tq7f"></div></div>
+    <div class="qb"><div class="qt">8. Abgelehnte Bewerberdaten dürfen wie lange aufbewahrt werden?</div><div class="qo">
+      <label><input type="radio" name="tq8" value="a"> 2 Jahre</label>
+      <label><input type="radio" name="tq8" value="b"> Max. 6 Monate nach Absage</label>
+      <label><input type="radio" name="tq8" value="c"> Unbegrenzt wenn in der Cloud gespeichert</label></div><div class="qfb" id="tq8f"></div></div>
+    <div class="qb"><div class="qt">9. Wann beginnt die 72h-Meldefrist bei Datenpannen (DSGVO)?</div><div class="qo">
+      <label><input type="radio" name="tq9" value="a"> Ab dem Moment der Panne</label>
+      <label><input type="radio" name="tq9" value="b"> Ab Bekanntwerden durch das Unternehmen</label>
+      <label><input type="radio" name="tq9" value="c"> Ab vollständiger interner Dokumentation</label></div><div class="qfb" id="tq9f"></div></div>
+    <div class="qb"><div class="qt">10. In der Schweiz (nDSG) — wer wird bei Verstoss gebüsst?</div><div class="qo">
+      <label><input type="radio" name="tq10" value="a"> Das Unternehmen</label>
+      <label><input type="radio" name="tq10" value="b"> Die natürliche Person (Manager, DPO) — bis CHF 250'000</label></div><div class="qfb" id="tq10f"></div></div>
+    <div class="qb"><div class="qt">11. Need-to-Know bedeutet:</div><div class="qo">
+      <label><input type="radio" name="tq11" value="a"> Alle Mitarbeiter dürfen alle Daten sehen</label>
+      <label><input type="radio" name="tq11" value="b"> Jeder hat nur Zugang zu Daten die er für seine Aufgabe braucht</label>
+      <label><input type="radio" name="tq11" value="c"> Management hat vollen Datenzugang</label></div><div class="qfb" id="tq11f"></div></div>
+    <div class="qb"><div class="qt">12. Was ist der DPO (Datenschutzbeauftragter)?</div><div class="qo">
+      <label><input type="radio" name="tq12" value="a"> Alleinverantwortlich für Datenschutz-Compliance</label>
+      <label><input type="radio" name="tq12" value="b"> Berater, Koordinator, Anlaufstelle — aber nicht Hauptverantwortlicher</label>
+      <label><input type="radio" name="tq12" value="c"> Derjenige der bei Bussen zahlen muss</label></div><div class="qfb" id="tq12f"></div></div>
+    <div class="qb"><div class="qt">13. Betroffene müssen über Datenverarbeitung informiert werden:</div><div class="qo">
+      <label><input type="radio" name="tq13" value="a"> Auf Anfrage</label>
+      <label><input type="radio" name="tq13" value="b"> Bei oder vor Erhebung — proaktiv</label>
+      <label><input type="radio" name="tq13" value="c"> Erst bei Datenpanne</label></div><div class="qfb" id="tq13f"></div></div>
+    <div class="qb"><div class="qt">14. Kundendaten für Vertragsabwicklung erhoben — für Newsletter nutzen?</div><div class="qo">
+      <label><input type="radio" name="tq14" value="a"> Ja — Kunden wurden ja schon informiert</label>
+      <label><input type="radio" name="tq14" value="b"> Nein — andere Zwecke brauchen neue Rechtsgrundlage (Einwilligung)</label></div><div class="qfb" id="tq14f"></div></div>
+    <div class="qb"><div class="qt">15. Welcher der Datenschutzgrundsätze verlangt den Nachweis der Compliance?</div><div class="qo">
+      <label><input type="radio" name="tq15" value="a"> Richtigkeit</label>
+      <label><input type="radio" name="tq15" value="b"> Rechenschaftspflicht (Accountability)</label>
+      <label><input type="radio" name="tq15" value="c"> Integrität</label></div><div class="qfb" id="tq15f"></div></div>
+    <button class="qsub" onclick="finalTest()">Abschlusstest auswerten</button>
+    <div class="qres" id="testres"></div>
+  </div>
+  <div class="cert-panel" id="mainCert">
+    <div class="cert-ico">🎓</div>
+    <div class="cert-tit">Datenschutz Kernschulung — Zertifikat</div>
+    <p style="font-size:12px;color:#666;margin:4px 0;">Hiermit wird bestätigt, dass</p>
+    <div class="cert-name" id="certNameMain">___________________________</div>
+    <p style="font-size:12px;color:#666;margin:4px 0;">die Datenschutz Kernschulung (M01–M13) erfolgreich abgeschlossen hat.</p>
+    <p style="font-size:11px;color:#999;margin:6px 0;">Module: M01 Personendaten · M02 Anwendungsbereich · M03 Anonymisierung · M04 Prinzipien · M05 Rechtsgrundlagen · M06 Einwilligung · M07 Minimierung · M08 Löschung · M09 VVT · M10 Information · M11 Verantwortung · M12 Datenpannen · M13 Sanktionen</p>
+    <p style="font-size:11px;color:#999;margin:4px 0;">Datum: <span id="certDateMain"></span></p>
+    <input class="cert-inp" type="text" id="certNameInp" placeholder="Ihren Namen eingeben..." oninput="document.getElementById('certNameMain').textContent=this.value||'___________________________'">
+    <br><button class="cert-print" onclick="window.print()">🖨️ Zertifikat drucken / speichern</button>
+    <p style="font-size:11px;color:#aaa;margin-top:12px;">Optional: Länder-Spezifikmodule CH · UK · USA · China (Sidebar) · Rollenmodule S02–S13 verfügbar</p>
+  </div>
+</div>
+
+<!-- LÄNDERMODULE -->
+<div class="mod" id="lch">
+  <div class="mhdr">
+    <div class="mh-code">LÄNDERMODUL CH · OPTIONAL</div>
+    <div class="mh-title">🇨🇭 Schweiz — nDSG Besonderheiten</div>
+    <div class="mh-sub">Was gilt zusätzlich / anders im revidierten Datenschutzgesetz der Schweiz?</div>
+  </div>
+  <div class="sec"><h2>Wichtigste nDSG-Unterschiede zur DSGVO</h2>
+  <div class="tw"><table>
+    <tr><th>Thema</th><th>DSGVO (EU)</th><th>nDSG (CH)</th></tr>
+    <tr><td>Sanktion</td><td>Unternehmensbusse bis €20 Mio / 4%</td><td>Personalstrafe bis CHF 250'000 (natürl. Person!)</td></tr>
+    <tr><td>DPO Pflicht</td><td>Teilweise Pflicht</td><td>Kein Pflicht-DSB — Datenschutzberater empfohlen</td></tr>
+    <tr><td>Aufsichtsbehörde</td><td>Nationale DPAs (EDPB)</td><td>Eidg. Datenschutz- und Öffentlichkeitsbeauftragter (EDÖB)</td></tr>
+    <tr><td>Meldepflicht Panne</td><td>72h an DPA</td><td>Unverzüglich an EDÖB bei hohem Risiko</td></tr>
+    <tr><td>Betroffenenrechte</td><td>Art. 15–22 DSGVO</td><td>Art. 25–28 nDSG — ähnlich, leichte Abweichungen</td></tr>
+    <tr><td>Datenschutz-Folgenabschätzung</td><td>Art. 35 DSGVO</td><td>Art. 22 nDSG — ähnliche Anforderungen</td></tr>
+    <tr><td>Drittlandtransfers</td><td>Art. 44–49 DSGVO</td><td>Art. 16–17 nDSG — CH SCCs möglich, TIA erforderlich</td></tr>
+    <tr><td>In Kraft</td><td>25.05.2018</td><td>01.09.2023</td></tr>
+  </table></div>
+  <div class="rb"><strong>Wichtigstes für Schweizer Unternehmen:</strong> Die Personalstrafe trifft Manager persönlich — nicht das Unternehmen. Und: Schweizer Unternehmen die EU-Kunden haben müssen trotzdem die DSGVO einhalten (Marktortprinzip).</div>
+  </div>
+  <div class="quiz-wrap">
+    <div class="quiz-title">📋 Kurzcheck CH</div>
+    <div class="qb"><div class="qt">Wer zahlt die nDSG-Busse bei Verstoss?</div><div class="qo">
+      <label><input type="radio" name="lchq1" value="a"> Das Unternehmen</label>
+      <label><input type="radio" name="lchq1" value="b"> Die natürliche Person (Manager, Verantwortliche:r)</label></div><div class="qfb" id="lchq1f"></div></div>
+    <button class="qsub" onclick="chk('lch',['b'])">Prüfen</button>
+    <div class="qres" id="lchres"></div>
+    <button class="nxt-btn" id="lchnxt" onclick="nxt('lch','luk')">Weiter: UK GDPR →</button>
+  </div>
+</div>
+
+<div class="mod" id="luk">
+  <div class="mhdr">
+    <div class="mh-code">LÄNDERMODUL UK · OPTIONAL</div>
+    <div class="mh-title">🇬🇧 UK — UK GDPR & IDTA</div>
+    <div class="mh-sub">Was gilt nach dem Brexit für Datentransfers und UK-Datenschutz?</div>
+  </div>
+  <div class="sec"><h2>UK GDPR — weitgehend DSGVO-äquivalent</h2>
+  <p>Nach dem Brexit hat UK die DSGVO als UK GDPR übernommen. Inhaltlich weitgehend identisch, aber separate Rechtsordnung mit eigener Aufsichtsbehörde (ICO).</p>
+  <div class="tw"><table>
+    <tr><th>Thema</th><th>UK GDPR</th></tr>
+    <tr><td>Behörde</td><td>Information Commissioner's Office (ICO)</td></tr>
+    <tr><td>Max. Busse</td><td>£17.5 Mio oder 4% globaler Umsatz</td></tr>
+    <tr><td>Drittlandtransfers aus UK</td><td>UK IDTA (International Data Transfer Agreement) statt EU SCCs</td></tr>
+    <tr><td>EU→UK Transfer</td><td>EU-Angemessenheitsbeschluss 2021 — kein TIA nötig</td></tr>
+    <tr><td>UK→EU Transfer</td><td>UK-Angemessenheitsbeschluss für EU — kein IDTA nötig</td></tr>
+  </table></div>
+  <div class="wb"><strong>Wichtig:</strong> UK→Drittland (z.B. USA, China) erfordert UK IDTA statt EU SCCs. Wer von der EU und von UK aus überträgt braucht beide Mechanismen.</div>
+  </div>
+  <div class="quiz-wrap">
+    <div class="quiz-title">📋 Kurzcheck UK</div>
+    <div class="qb"><div class="qt">Welcher Mechanismus gilt für Transfers aus UK in Drittstaaten?</div><div class="qo">
+      <label><input type="radio" name="lukq1" value="a"> EU SCCs 2021</label>
+      <label><input type="radio" name="lukq1" value="b"> UK IDTA</label>
+      <label><input type="radio" name="lukq1" value="c"> Kein Mechanismus nötig</label></div><div class="qfb" id="lukq1f"></div></div>
+    <button class="qsub" onclick="chk('luk',['b'])">Prüfen</button>
+    <div class="qres" id="lukres"></div>
+    <button class="nxt-btn" id="luknxt" onclick="nxt('luk','lus')">Weiter: USA →</button>
+  </div>
+</div>
+
+<div class="mod" id="lus">
+  <div class="mhdr">
+    <div class="mh-code">LÄNDERMODUL USA · OPTIONAL</div>
+    <div class="mh-title">🇺🇸 USA — CCPA/CPRA Grundlagen</div>
+    <div class="mh-sub">Was gilt für US-Konsumenten? CCPA/CPRA im Überblick.</div>
+  </div>
+  <div class="sec"><h2>Kein allgemeines Bundesdatenschutzgesetz</h2>
+  <p>USA hat kein allgemeines Datenschutzgesetz auf Bundesebene. Sektorale Gesetze (HIPAA Gesundheit, FERPA Bildung, COPPA Kinder). Wichtigstes Verbraucherschutzgesetz: CCPA/CPRA (Kalifornien).</p>
+  <div class="tw"><table>
+    <tr><th>CCPA/CPRA</th><th>Details</th></tr>
+    <tr><td>Gilt wenn</td><td>>$25 Mio Umsatz OR >100'000 Konsumenten OR >50% aus Datenverkauf</td></tr>
+    <tr><td>Rechte der Konsumenten</td><td>Auskunft, Löschung, Opt-Out Datenverkauf, Nicht-Diskriminierung, Berichtigung</td></tr>
+    <tr><td>"Do Not Sell My Info"</td><td>Pflichtlink auf Website wenn Daten "verkauft" werden</td></tr>
+    <tr><td>Busse</td><td>$7'500/intentionaler Verstoss, $2'500/fahrlässig + Sammelklagen</td></tr>
+    <tr><td>Behörde</td><td>California Privacy Protection Agency (CPPA)</td></tr>
+  </table></div>
+  </div>
+  <div class="quiz-wrap">
+    <div class="quiz-title">📋 Kurzcheck USA</div>
+    <div class="qb"><div class="qt">CCPA gilt für welche Unternehmen?</div><div class="qo">
+      <label><input type="radio" name="lusq1" value="a"> Alle Unternehmen weltweit mit US-Kunden</label>
+      <label><input type="radio" name="lusq1" value="b"> Unternehmen die bestimmte Schwellenwerte überschreiten und Daten von Kaliforniern verarbeiten</label></div><div class="qfb" id="lusq1f"></div></div>
+    <button class="qsub" onclick="chk('lus',['b'])">Prüfen</button>
+    <div class="qres" id="lusres"></div>
+    <button class="nxt-btn" id="lusnxt" onclick="nxt('lus','lcn')">Weiter: China →</button>
+  </div>
+</div>
+
+<div class="mod" id="lcn">
+  <div class="mhdr">
+    <div class="mh-code">LÄNDERMODUL CN · OPTIONAL</div>
+    <div class="mh-title">🇨🇳 China — PIPL Grundlagen</div>
+    <div class="mh-sub">Was gilt für Verarbeitung von Daten chinesischer Staatsangehöriger?</div>
+  </div>
+  <div class="sec"><h2>PIPL — Personal Information Protection Law</h2>
+  <p>In Kraft seit 1. November 2021. Gilt für Verarbeitung von Personendaten chinesischer Staatsangehöriger — auch durch ausländische Unternehmen wenn Auswirkung auf China-Ansässige.</p>
+  <div class="tw"><table>
+    <tr><th>Thema</th><th>PIPL</th></tr>
+    <tr><td>Rechtsgrundlagen</td><td>Ähnlich DSGVO: Einwilligung, Vertragserfüllung, gesetzl. Pflicht, lebenswichtige Interessen, öffentliches Interesse</td></tr>
+    <tr><td>Ausgehende Transfers aus China</td><td>CAC-Sicherheitsbewertung ODER PRC Standard Contracts ODER CAC-Zertifizierung</td></tr>
+    <tr><td>Datenlokalisierung</td><td>Pflicht für kritische Infrastruktur und wichtige Daten</td></tr>
+    <tr><td>Staatlicher Zugriff</td><td>Behörden können ohne richterliche Kontrolle zugreifen</td></tr>
+    <tr><td>Busse</td><td>CNY 50 Mio / 5% Jahresumsatz + Plattformsperren</td></tr>
+  </table></div>
+  <div class="rb"><strong>Für Transfers EU→China:</strong> EU SCCs + TIA + E2E-Verschlüsselung. Transfer wenn möglich vermeiden oder auf Minimum reduzieren.</div>
+  </div>
+  <div class="quiz-wrap">
+    <div class="quiz-title">📋 Kurzcheck China</div>
+    <div class="qb"><div class="qt">Gilt PIPL auch für ausländische Unternehmen?</div><div class="qo">
+      <label><input type="radio" name="lcnq1" value="a"> Nein — nur für chinesische Unternehmen</label>
+      <label><input type="radio" name="lcnq1" value="b"> Ja — wenn Verarbeitung von Daten China-Ansässiger mit Auswirkung auf China</label></div><div class="qfb" id="lcnq1f"></div></div>
+    <button class="qsub" onclick="chk('lcn',['b'])">Prüfen</button>
+    <div class="qres" id="lcnres"></div>
+    <button class="nxt-btn" id="lcnnxt" onclick="go('mtest')">Zurück zum Abschlusstest →</button>
+  </div>
+</div>
+
+
+<!-- KI MODUL -->
+<div class="mod" id="mki">
+  <div class="mhdr" style="background:linear-gradient(135deg,#1a0533 0%,#0b1f12 100%);">
+    <div class="mh-code" style="color:#ce93d8;">MODUL KI · OPTIONAL · ~20 Minuten</div>
+    <div class="mh-title">Künstliche Intelligenz am Arbeitsplatz</div>
+    <div class="mh-sub">KI-Tools verantwortungsvoll nutzen · EU AI Act · Datenschutz bei KI</div>
+    <div class="mh-tags"><span class="mtag">👥 Alle Mitarbeitenden</span><span class="mtag">🌍 Alle Länder</span><span class="mtag">⚖️ EU AI Act 2024/1689 · Art. 4 KI-Kompetenz</span></div>
+  </div>
+
+  <div class="sec">
+    <h2>1. KI-Kompetenzpflicht — seit Februar 2025</h2>
+    <p>Der EU AI Act (Verordnung 2024/1689) schreibt seit Februar 2025 vor: Unternehmen müssen sicherstellen, dass ihre Mitarbeitenden das nötige Mass an KI-Kompetenz haben um KI-Systeme verantwortungsvoll zu nutzen.</p>
+    <div class="ob"><strong>Art. 4 EU AI Act:</strong> Provider und Nutzer von KI-Systemen müssen für ausreichende KI-Kompetenz des Personals sorgen. Diese Schulung ist Teil der Erfüllung dieser Pflicht.</div>
+  </div>
+
+  <div class="sec">
+    <h2>2. Was ist KI? — Einfache Definition</h2>
+    <p>Ein <strong>KI-System</strong> ist ein maschinenbasiertes System das aus Eingaben Ergebnisse wie Vorhersagen, Empfehlungen, Entscheidungen oder Inhalte generiert — auf eine Art die reale oder virtuelle Umgebungen beeinflusst.</p>
+    <div class="tw"><table>
+      <tr><th>KI-Tool</th><th>Was es tut</th><th>Im Alltag</th></tr>
+      <tr><td>ChatGPT, Claude, Gemini</td><td>Text generieren, beantworten, zusammenfassen</td><td>E-Mails, Berichte, Recherche</td></tr>
+      <tr><td>Microsoft Copilot</td><td>Office-Produktivität, Code, Dokumente</td><td>Word, Excel, Teams, Outlook</td></tr>
+      <tr><td>GitHub Copilot</td><td>Code schreiben und vervollständigen</td><td>Softwareentwicklung</td></tr>
+      <tr><td>KI-Bildgeneratoren (Midjourney, DALL-E)</td><td>Bilder aus Text erstellen</td><td>Marketing, Design</td></tr>
+      <tr><td>KI in HR-Tools</td><td>CV-Screening, Kandidatenranking</td><td>Recruiting — Hochrisiko!</td></tr>
+    </table></div>
+  </div>
+
+  <div class="sec">
+    <h2>3. Datenschutzrisiken bei KI-Tools</h2>
+    <p>Wenn Sie Personendaten in ein KI-Tool eingeben, verlassen diese Daten Ihr Unternehmen — und landen beim KI-Anbieter. Das ist ein <strong>Datentransfer</strong> der Datenschutzrecht unterliegt.</p>
+    <div class="rb"><strong>Niemals in KI-Tools eingeben:</strong><br>
+    • Namen + medizinische Informationen von Patienten oder Kunden<br>
+    • Vertrauliche Personaldaten (Lohn, Leistungsbeurteilungen, Disziplinarfälle)<br>
+    • Vollständige Kundendatensätze oder CRM-Exporte<br>
+    • Bankdaten, Passwörter, Zugangsdaten<br>
+    • Interna die als vertraulich klassifiziert sind</div>
+    <div class="tw"><table>
+      <tr><th>Situation</th><th>Erlaubt?</th><th>Warum</th></tr>
+      <tr><td>"Schreib mir eine E-Mail-Vorlage für Kundenbeschwerden"</td><td>✅ Ja</td><td>Keine Personendaten</td></tr>
+      <tr><td>"Fasse diesen Arztbericht von Frau Müller zusammen"</td><td>❌ Nein</td><td>Gesundheitsdaten, kein AVV</td></tr>
+      <tr><td>"Analysiere diese Kundenliste" (mit echten Namen)</td><td>❌ Nein</td><td>Personendaten ohne Rechtsgrundlage</td></tr>
+      <tr><td>"Hilf mir diesen anonymisierten Fallbericht strukturieren"</td><td>✅ Ja (wenn wirklich anonym)</td><td>Keine Personendaten</td></tr>
+      <tr><td>Copilot für interne Präsentation ohne Kundendaten</td><td>✅ Ja (wenn AVV vorhanden)</td><td>Microsoft hat Enterprise AVV</td></tr>
+    </table></div>
+    <div class="ib"><strong>AVV-Pflicht:</strong> Auch für KI-Tools braucht es einen Auftragsverarbeitungsvertrag (AVV) wenn Personendaten verarbeitet werden könnten. Prüfen Sie ob Ihr Unternehmen einen AVV mit dem KI-Anbieter hat.</div>
+  </div>
+
+  <div class="sec">
+    <h2>4. EU AI Act — Was ist verboten?</h2>
+    <p>Seit <strong>2. Februar 2025</strong> sind bestimmte KI-Praktiken absolut verboten:</p>
+    <div class="rb"><strong>Absolut verboten (Art. 5 EU AI Act):</strong><br>
+    • Social Scoring durch staatliche Stellen<br>
+    • Manipulation durch subliminale Techniken<br>
+    • Ausnutzung von Schwächen vulnerabler Personen<br>
+    • Biometrische Echtzeit-Fernidentifikation im öffentlichen Raum (enge Ausnahmen)<br>
+    • <strong>Emotionserkennung am Arbeitsplatz und in Bildungseinrichtungen</strong><br>
+    • Biometrische Kategorisierung (politisch, religiös, sexuell)</div>
+  </div>
+
+  <div class="sec">
+    <h2>5. KI-Risikoklassen — Welche betreffen mich?</h2>
+    <div class="tw"><table>
+      <tr><th>Risikoklasse</th><th>Beispiele</th><th>Pflichten</th></tr>
+      <tr><td><strong style="color:#c62828;">Unacceptable Risk</strong></td><td>Social Scoring, Emotionserkennung Arbeitsplatz</td><td>Absolut verboten</td></tr>
+      <tr><td><strong style="color:#e65100;">High Risk</strong></td><td>CV-Screening, Kreditentscheid, medizinische Diagnose</td><td>Umfangreiche Pflichten ab Aug. 2026</td></tr>
+      <tr><td><strong style="color:#f9a825;">Limited Risk</strong></td><td>Chatbots, KI-generierte Texte/Bilder</td><td>Transparenzpflicht (kenntlich machen)</td></tr>
+      <tr><td><strong style="color:#2e7d32;">Minimal Risk</strong></td><td>Spam-Filter, Rechtschreibprüfung</td><td>Keine spezifischen Pflichten</td></tr>
+    </table></div>
+    <div class="wb"><strong>Transparenzpflicht:</strong> Wenn Sie mit einem Chatbot interagieren oder KI-generierte Inhalte erhalten — der Nutzer muss darüber informiert werden. KI-generierte Texte/Bilder müssen als solche gekennzeichnet werden.</div>
+  </div>
+
+  <div class="sec">
+    <h2>6. Hochrisiko-KI im HR — Besondere Vorsicht</h2>
+    <p>KI-Tools die bei Einstellungsentscheiden, Leistungsbeurteilungen oder Beförderungen helfen gelten als <strong>Hochrisiko-KI</strong>. Ab August 2026 greifen umfangreiche Pflichten:</p>
+    <ul>
+      <li>Menschliche Aufsicht und Überprüfung zwingend</li>
+      <li>Betroffene müssen informiert werden</li>
+      <li>Recht auf Erklärung der Entscheidung</li>
+      <li>Logging und Audit-Trail erforderlich</li>
+    </ul>
+    <div class="ib">Praxistipp: KI als Unterstützung für den Menschen nutzen — nicht als alleinigen Entscheider. Der Mensch muss immer die finale Entscheidung treffen und verantworten.</div>
+  </div>
+
+  <div class="sec">
+    <h2>7. Praktischer Fall</h2>
+    <div class="case-box">
+      <div class="case-title">🔍 Praxisfall</div>
+      <div class="case-q">Ihre HR-Kollegin nutzt ChatGPT um Bewerbungsunterlagen zu analysieren. Sie kopiert CV-Texte inkl. Namen, Adresse und Foto-Beschreibungen hinein. Probleme?</div>
+      <button class="case-reveal" onclick="reveal(this)">Antwort anzeigen</button>
+      <div class="case-answer">Mehrere: 1. Personendaten werden an OpenAI übermittelt — Transfer ohne AVV und ohne Information der Bewerber. 2. Bewerberdaten sind besonders sensibel. 3. Wenn das Tool Entscheidungen beeinflusst: möglicherweise Hochrisiko-KI mit Pflichten. 4. Mögliche DSGVO-Verletzung. Lösung: Daten anonymisieren bevor Eingabe in KI-Tool (Namen, Adressen entfernen) — oder ein Enterprise-KI-Tool mit AVV nutzen das keine Daten für Training verwendet.</div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2>8. Checkliste — KI verantwortungsvoll nutzen</h2>
+    <div class="ob">
+      ✅ Keine Personendaten ohne AVV in externe KI-Tools<br>
+      ✅ KI-generierte Inhalte als solche kennzeichnen<br>
+      ✅ KI-Outputs immer kritisch prüfen — Halluzinationen möglich<br>
+      ✅ Bei HR-Entscheidungen: KI nur als Hilfe, Mensch entscheidet<br>
+      ✅ Verbotene KI-Praktiken kennen und melden wenn Sie solche sehen<br>
+      ✅ Neue KI-Tools dem DPO melden bevor Einsatz mit Personendaten<br>
+      ✅ KI-Nutzung dokumentieren wenn Personendaten verarbeitet werden
+    </div>
+  </div>
+
+  <div class="quiz-wrap">
+    <div class="quiz-title">📋 Wissenscheck KI-Modul</div>
+    <div class="qb"><div class="qt">1. Sie wollen Kundendaten für eine Analyse in ChatGPT eingeben. Was ist falsch daran?</div>
+      <div class="qo"><label><input type="radio" name="mkiq1" value="a"> Nichts — ChatGPT ist sicher</label>
+      <label><input type="radio" name="mkiq1" value="b"> Personendaten verlassen das Unternehmen ohne AVV und ohne Rechtsgrundlage</label>
+      <label><input type="radio" name="mkiq1" value="c"> Nur ein Problem wenn mehr als 1000 Kunden betroffen</label></div>
+      <div class="qfb" id="mkiq1f"></div></div>
+    <div class="qb"><div class="qt">2. Was ist seit Februar 2025 absolut verboten?</div>
+      <div class="qo"><label><input type="radio" name="mkiq2" value="a"> KI-Chatbots auf Unternehmenswebsites</label>
+      <label><input type="radio" name="mkiq2" value="b"> Emotionserkennung am Arbeitsplatz</label>
+      <label><input type="radio" name="mkiq2" value="c"> KI zur Textkorrektur</label></div>
+      <div class="qfb" id="mkiq2f"></div></div>
+    <div class="qb"><div class="qt">3. HR nutzt KI zum CV-Screening. Was gilt ab 2026?</div>
+      <div class="qo"><label><input type="radio" name="mkiq3" value="a"> Keine besonderen Regeln — KI darf frei entscheiden</label>
+      <label><input type="radio" name="mkiq3" value="b"> Hochrisiko-KI-Pflichten: menschliche Aufsicht, Transparenz, Logging</label>
+      <label><input type="radio" name="mkiq3" value="c"> Nur wenn mehr als 50 Bewerbungen verarbeitet werden</label></div>
+      <div class="qfb" id="mkiq3f"></div></div>
+    <button class="qsub" onclick="chk('mki',['b','b','b'])">Antworten prüfen</button>
+    <div class="qres" id="mkires"></div>
+    <button class="nxt-btn" id="mkinxt" onclick="go('mtest')">Zum Abschlusstest →</button>
+  </div>
+</div>
+
+</div><!-- end main -->
+</div><!-- end layout -->
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const MODS=['m01','m02','m03','m04','m05','m06','m07','m08','m09','m10','m11','m12','m13','mtest'];
+const CORRECT={
+  m01:['b','b','b'],m02:['c','b','b'],m03:['b','a'],m04:['b','b'],
+  m05:['b','b'],m06:['b','b'],m07:['b','b'],m08:['b','c'],
+  m09:['b','c'],m10:['b','b'],m11:['b','b'],m12:['b','b'],m13:['b','b'],
+  lch:['b'],luk:['b'],lus:['b'],lcn:['b'],
+  mki:['b','b','b']
+};
+const done={};
+
+function go(id){
+  document.querySelectorAll('.mod').forEach(m=>m.classList.remove('active'));
+  document.querySelectorAll('.mb').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.getElementById('btn-'+id)?.classList.add('active');
+  window.scrollTo(0,56);
+}
+
+function chk(mod, correct){
+  const n=correct.length;
+  let score=0;
+  for(let i=1;i<=n;i++){
+    const sel=document.querySelector(`input[name="${mod}q${i}"]:checked`);
+    const fb=document.getElementById(`${mod}q${i}f`);
+    if(!sel){if(fb){fb.style.display='block';fb.className='qfb qferr';fb.textContent='Bitte wählen Sie eine Antwort.';}continue;}
+    if(fb){
+      if(sel.value===correct[i-1]){score++;fb.style.display='block';fb.className='qfb qfok';fb.textContent='✓ Richtig!';}
+      else{fb.style.display='block';fb.className='qfb qferr';fb.textContent='✗ Nicht korrekt — lesen Sie den Abschnitt nochmals.';}
+    }
+  }
+  const pct=Math.round(score/n*100);
+  const res=document.getElementById(mod+'res');
+  if(res){res.style.display='block';res.innerHTML=`<div class="qrscore">${score}/${n} — ${pct}%</div><div class="qrmsg">${pct>=67?'✅ Abschnitt abgeschlossen.':'⚠️ Bitte überprüfen — 67% Mindest.'}</div>`;}
+  if(pct>=67){
+    done[mod]=true;
+    const btn=document.getElementById('btn-'+mod);
+    if(btn)btn.classList.add('done');
+    const nxtBtn=document.getElementById(mod+'nxt');
+    if(nxtBtn)nxtBtn.style.display='inline-block';
+    updateProg();
+  }
+}
+
+function finalTest(){
+  const correct=['b','b','b','b','b','b','b','b','b','b','b','b','b','b','b'];
+  let score=0;
+  for(let i=1;i<=15;i++){
+    const sel=document.querySelector(`input[name="tq${i}"]:checked`);
+    const fb=document.getElementById(`tq${i}f`);
+    if(!sel){if(fb){fb.style.display='block';fb.className='qfb qferr';fb.textContent='Bitte wählen.';}continue;}
+    if(fb){
+      if(sel.value===correct[i-1]){score++;fb.style.display='block';fb.className='qfb qfok';fb.textContent='✓ Richtig!';}
+      else{fb.style.display='block';fb.className='qfb qferr';fb.textContent='✗ Nicht korrekt.';}
+    }
+  }
+  const pct=Math.round(score/15*100);
+  const res=document.getElementById('testres');
+  res.style.display='block';
+  if(pct>=80){
+    res.innerHTML=`<div class="qrscore">${score}/15 — ${pct}%</div><div class="qrmsg">🎉 Bestanden! Zertifikat verfügbar.</div>`;
+    const cert=document.getElementById('mainCert');
+    cert.classList.add('show');
+    document.getElementById('certDateMain').textContent=new Date().toLocaleDateString('de-CH');
+    done['mtest']=true;
+    document.getElementById('btn-mtest')?.classList.add('done');
+    document.getElementById('certNavBtn').style.display='block';
+    updateProg();
+  } else {
+    res.innerHTML=`<div class="qrscore">${score}/15 — ${pct}%</div><div class="qrmsg">⚠️ Mindestens 80% (12/15) erforderlich. Bitte wiederholen Sie die markierten Module.</div>`;
+  }
+}
+
+function nxt(current,next){go(next);}
+function goToCert(){go('mtest');document.getElementById('mainCert').scrollIntoView({behavior:'smooth'});}
+
+function reveal(btn){
+  const ans=btn.nextElementSibling;
+  ans.style.display=ans.style.display==='block'?'none':'block';
+  btn.textContent=ans.style.display==='block'?'Antwort verbergen':'Antwort anzeigen';
+}
+
+function updateProg(){
+  const coreIds=['m01','m02','m03','m04','m05','m06','m07','m08','m09','m10','m11','m12','m13','mtest'];
+  const count=coreIds.filter(id=>done[id]).length;
+  document.getElementById('spval').textContent=`${count} / 14`;
+  document.getElementById('spfill').style.width=(count/14*100)+'%';
+}
+</script>
+</body>
+</html>
