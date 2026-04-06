@@ -93,14 +93,29 @@ tr:nth-child(even) td{background:#fafafa;}
 .qrmsg{font-size:12px;color:#555;}
 .nxt-btn{background:var(--gold);color:var(--ink);border:none;padding:9px 22px;border-radius:7px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Outfit',sans-serif;margin-top:8px;display:none;}
 
-.cert-panel{display:none;background:#fff;border:1px solid #e0e0e0;border-radius:var(--r);padding:28px;text-align:center;margin-top:20px;}
+.cert-panel{display:none;background:linear-gradient(135deg,#07100a 0%,#132d1a 100%);border:2px solid var(--gold);border-radius:14px;padding:36px 32px;text-align:center;margin-top:20px;}
 .cert-panel.show{display:block;}
-.cert-ico{font-size:44px;margin-bottom:10px;}
-.cert-tit{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:var(--ink);margin-bottom:5px;}
-.cert-name{font-size:18px;font-weight:700;color:var(--gold);margin:8px 0;}
-.cert-inp{padding:7px 14px;border:1px solid #ddd;border-radius:5px;font-size:13px;width:240px;font-family:'Outfit',sans-serif;margin-top:8px;}
-.cert-print{background:var(--ink);color:#fff;border:none;padding:8px 18px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif;margin-top:10px;}
-@media print{nav,.sidebar,.nxt-btn,.qsub,.cert-print,.cert-inp{display:none!important;}.main{max-width:100%!important;}.cert-panel{border:2px solid var(--gold)!important;}}
+.cert-header{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid rgba(192,140,40,.3);}
+.cert-logo-txt{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:700;color:#fff;letter-spacing:.05em;}.cert-logo-txt em{color:var(--gold);font-style:normal;}
+.cert-ico{font-size:36px;margin-bottom:8px;}
+.cert-tit{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:#fff;margin-bottom:4px;}
+.cert-subtitle{font-size:12px;color:rgba(255,255,255,.45);margin-bottom:16px;font-weight:300;}
+.cert-confirm{font-size:12px;color:rgba(255,255,255,.5);margin-bottom:6px;}
+.cert-name{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:var(--gold);margin:10px 0;min-height:40px;}
+.cert-score-box{background:rgba(192,140,40,.12);border:1px solid rgba(192,140,40,.3);border-radius:10px;padding:14px 24px;display:inline-block;margin:14px 0;}
+.cert-score-num{font-size:32px;font-weight:700;color:var(--gold);line-height:1;}
+.cert-score-lbl{font-size:11px;color:rgba(255,255,255,.4);margin-top:3px;}
+.cert-passed{font-size:13px;font-weight:700;color:#4caf50;margin:8px 0;letter-spacing:.05em;}
+.cert-date{font-size:11px;color:rgba(255,255,255,.35);margin:6px 0 16px;}
+.cert-modules{font-size:10px;color:rgba(255,255,255,.3);line-height:1.6;margin-bottom:16px;max-width:500px;margin-left:auto;margin-right:auto;}
+.cert-inp{padding:8px 16px;border:1px solid rgba(192,140,40,.4);border-radius:6px;font-size:13px;width:260px;font-family:'Outfit',sans-serif;margin-top:4px;background:rgba(255,255,255,.08);color:#fff;}
+.cert-inp::placeholder{color:rgba(255,255,255,.3);}
+.cert-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px;}
+.cert-print-btn{background:var(--gold);color:var(--ink);border:none;padding:10px 22px;border-radius:7px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Outfit',sans-serif;}
+.cert-print-btn:hover{background:var(--gold-l);}
+.cert-scorm{background:transparent;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.6);padding:10px 22px;border-radius:7px;font-size:12px;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:6px;}
+.cert-scorm:hover{border-color:var(--gold);color:var(--gold);}
+@media print{nav,.sidebar,.nxt-btn,.qsub,.cert-btns,.cert-inp{display:none!important;}}
 @media(max-width:680px){.layout{grid-template-columns:1fr;}.sidebar{position:static;height:auto;}.main{padding:14px;}}
 </style>
 </head>
@@ -994,16 +1009,28 @@ tr:nth-child(even) td{background:#fafafa;}
     <div class="qres" id="testres"></div>
   </div>
   <div class="cert-panel" id="mainCert">
-    <div class="cert-ico">🎓</div>
-    <div class="cert-tit">Datenschutz Kernschulung — Zertifikat</div>
-    <p style="font-size:12px;color:#666;margin:4px 0;">Hiermit wird bestätigt, dass</p>
+    <div class="cert-header">
+      <span style="font-size:24px;">🎓</span>
+      <div class="cert-logo-txt">ZEHNDER <em>GOVERNANCE</em></div>
+    </div>
+    <div class="cert-tit">Zertifikat über die erfolgreiche Teilnahme</div>
+    <div class="cert-subtitle">Datenschutz & KI Kernschulung — M01 bis M13</div>
+    <div class="cert-confirm">Hiermit wird bestätigt, dass</div>
     <div class="cert-name" id="certNameMain">___________________________</div>
-    <p style="font-size:12px;color:#666;margin:4px 0;">die Datenschutz Kernschulung (M01–M13) erfolgreich abgeschlossen hat.</p>
-    <p style="font-size:11px;color:#999;margin:6px 0;">Module: M01 Personendaten · M02 Anwendungsbereich · M03 Anonymisierung · M04 Prinzipien · M05 Rechtsgrundlagen · M06 Einwilligung · M07 Minimierung · M08 Löschung · M09 VVT · M10 Information · M11 Verantwortung · M12 Datenpannen · M13 Sanktionen</p>
-    <p style="font-size:11px;color:#999;margin:4px 0;">Datum: <span id="certDateMain"></span></p>
+    <div class="cert-confirm">die Datenschutz Kernschulung erfolgreich abgeschlossen hat.</div>
+    <div class="cert-score-box">
+      <div class="cert-score-num" id="certScoreMain">—</div>
+      <div class="cert-score-lbl">Ergebnis Abschlusstest</div>
+    </div>
+    <div class="cert-passed">✅ BESTANDEN</div>
+    <div class="cert-date">Datum: <span id="certDateMain"></span> · Zehnder Governance, Beinwil am See</div>
+    <div class="cert-modules">Module: M01 Personendaten · M02 Anwendungsbereich · M03 Anonymisierung · M04 Prinzipien · M05 Rechtsgrundlagen · M06 Einwilligung · M07 Minimierung · M08 Löschung · M09 VVT · M10 Information · M11 Verantwortung · M12 Datenpannen · M13 Sanktionen · EU AI Act</div>
     <input class="cert-inp" type="text" id="certNameInp" placeholder="Ihren Namen eingeben..." oninput="document.getElementById('certNameMain').textContent=this.value||'___________________________'">
-    <br><button class="cert-print" onclick="window.print()">🖨️ Zertifikat drucken / speichern</button>
-    <p style="font-size:11px;color:#aaa;margin-top:12px;">Optional: Länder-Spezifikmodule CH · UK · USA · China (Sidebar) · Rollenmodule S02–S13 verfügbar</p>
+    <div class="cert-btns">
+      <button class="cert-print-btn" onclick="printCert()">🖨️ Zertifikat drucken / als PDF speichern</button>
+      <a href="https://drive.google.com/file/d/1LFUWGg3fOthilFzDbfQkddum7EzOzz68/view" target="_blank" class="cert-scorm">📦 SCORM-Datei herunterladen</a>
+    </div>
+    <p style="font-size:10px;color:rgba(255,255,255,.2);margin-top:12px;">Optionale Vertiefung: Ländermodule CH · UK · USA · China · Rollenmodule S02–S13</p>
   </div>
 </div>
 
@@ -1323,6 +1350,7 @@ function finalTest(){
     res.innerHTML=`<div class="qrscore">${score}/15 — ${pct}%</div><div class="qrmsg">🎉 Bestanden! Zertifikat verfügbar.</div>`;
     const cert=document.getElementById('mainCert');
     cert.classList.add('show');
+    document.getElementById('certScoreMain').textContent=`${score} / 15 — ${pct}%`;
     document.getElementById('certDateMain').textContent=new Date().toLocaleDateString('de-CH');
     done['mtest']=true;
     document.getElementById('btn-mtest')?.classList.add('done');
@@ -1331,6 +1359,57 @@ function finalTest(){
   } else {
     res.innerHTML=`<div class="qrscore">${score}/15 — ${pct}%</div><div class="qrmsg">⚠️ Mindestens 80% (12/15) erforderlich. Bitte wiederholen Sie die markierten Module.</div>`;
   }
+}
+
+function printCert(){
+  const name=document.getElementById('certNameInp').value||'Teilnehmer/in';
+  const date=document.getElementById('certDateMain').textContent;
+  const score=document.getElementById('certScoreMain').textContent;
+  const win=window.open('','_blank','width=900,height=650');
+  win.document.write(`<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8">
+  <title>Zertifikat — Zehnder Governance</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{background:#f8f5ee;display:flex;align-items:center;justify-content:center;min-height:100vh;font-family:'Outfit',sans-serif;padding:20px;}
+    .cert{background:linear-gradient(135deg,#07100a 0%,#132d1a 100%);border:3px solid #c08c28;border-radius:16px;padding:48px 56px;text-align:center;max-width:700px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.3);}
+    .top-border{height:4px;background:linear-gradient(90deg,#245430,#c08c28,#245430);border-radius:2px;margin-bottom:32px;}
+    .logo{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:#fff;letter-spacing:.08em;margin-bottom:6px;}.logo em{color:#c08c28;font-style:normal;}
+    .divider{width:40px;height:2px;background:#c08c28;margin:16px auto;}
+    .certify{font-size:12px;color:rgba(255,255,255,.45);letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px;}
+    .name{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:700;color:#c08c28;margin:12px 0;letter-spacing:.02em;}
+    .completed{font-size:14px;color:rgba(255,255,255,.6);margin-bottom:20px;}
+    .course{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:#fff;margin-bottom:4px;}
+    .course-sub{font-size:12px;color:rgba(255,255,255,.35);margin-bottom:24px;}
+    .score-box{background:rgba(192,140,40,.12);border:1px solid rgba(192,140,40,.35);border-radius:10px;padding:16px 32px;display:inline-block;margin:16px 0;}
+    .score-num{font-size:36px;font-weight:700;color:#c08c28;line-height:1;}
+    .score-lbl{font-size:10px;color:rgba(255,255,255,.35);margin-top:4px;letter-spacing:.08em;text-transform:uppercase;}
+    .passed{font-size:14px;font-weight:700;color:#4caf50;letter-spacing:.1em;text-transform:uppercase;margin:12px 0;}
+    .meta{font-size:11px;color:rgba(255,255,255,.25);margin-top:20px;line-height:1.8;}
+    .modules{font-size:10px;color:rgba(255,255,255,.2);line-height:1.7;margin-top:12px;max-width:500px;margin-left:auto;margin-right:auto;}
+    .footer{margin-top:24px;padding-top:16px;border-top:1px solid rgba(192,140,40,.2);font-size:10px;color:rgba(255,255,255,.2);}
+    @media print{body{background:#fff;}.cert{box-shadow:none;}}
+  </style></head><body>
+  <div class="cert">
+    <div class="top-border"></div>
+    <div class="logo">ZEHNDER <em>GOVERNANCE</em></div>
+    <div class="divider"></div>
+    <div class="certify">Zertifikat über die erfolgreiche Teilnahme</div>
+    <div class="completed">Hiermit wird bestätigt, dass</div>
+    <div class="name">${name}</div>
+    <div class="completed">die Datenschutz & KI Kernschulung erfolgreich abgeschlossen hat.</div>
+    <div class="score-box">
+      <div class="score-num">${score}</div>
+      <div class="score-lbl">Ergebnis Abschlusstest</div>
+    </div>
+    <div class="passed">✓ Bestanden</div>
+    <div class="meta">Datum: ${date} &nbsp;·&nbsp; Zehnder Governance, Beinwil am See, Schweiz</div>
+    <div class="modules">Module: M01 Personendaten · M02 Anwendungsbereich · M03 Anonymisierung · M04 Grundsätze · M05 Rechtsgrundlagen · M06 Einwilligung · M07 Datenminimieurng · M08 Löschung · M09 Verarbeitungsverzeichnis · M10 Informationspflichten · M11 Verantwortung & DPO · M12 Datenpannen · M13 Sanktionen · EU AI Act</div>
+    <div class="footer">Zehnder Governance · zehndergovernance.com · Datenschutz & KI Compliance · 13 Jurisdiktionen</div>
+  </div>
+  <script>window.onload=function(){window.print();}<\/script>
+  </body></html>`);
+  win.document.close();
 }
 
 function nxt(current,next){go(next);}
