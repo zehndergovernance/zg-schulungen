@@ -1722,22 +1722,23 @@ _checkAuth(['standard', 'enterprise']);
   // Auto-Scan + Click-Handler
   // ===================================================================
 
-  function attachToLinks(root) {
-    const scope = root || document;
-    const links = scope.querySelectorAll('a[href*="drive.google.com"], a[href*="docs.google.com"]');
-    let attached = 0;
-    links.forEach((a) => {
-      if (a.dataset.zgProxyAttached === '1') return;
+  // Event-Delegation: 1 Listener auf document.body fängt Clicks aller (auch
+  // dynamisch nach DOMContentLoaded eingefügter) Drive-Links via closest().
+  function attachDelegatedHandler() {
+    if (!document.body) return false;
+    if (document.body.dataset.zgProxyDelegated === '1') return true;
+    document.body.dataset.zgProxyDelegated = '1';
+    document.body.addEventListener('click', (e) => {
+      const a = e.target.closest('a[href*="drive.google.com"], a[href*="docs.google.com"]');
+      if (!a) return;
       const fileId = extractFileId(a.href);
       if (!fileId) return;
-      a.dataset.zgProxyAttached = '1';
-      a.addEventListener('click', (e) => openFile(e, a.href));
-      attached++;
+      openFile(e, a.href);
     });
     if (config.debug) {
-      console.log(`[drive-proxy-client] ${attached} Drive-Links verdrahtet (von ${links.length} Kandidaten)`);
+      console.log('[drive-proxy-client] event-delegation attached to body');
     }
-    return attached;
+    return true;
   }
 
   // ===================================================================
@@ -1746,7 +1747,7 @@ _checkAuth(['standard', 'enterprise']);
 
   window.ZGDriveProxy = {
     openFile,
-    rescan: attachToLinks,
+    rescan: attachDelegatedHandler,
     extractFileId,
     config
   };
@@ -1758,7 +1759,7 @@ _checkAuth(['standard', 'enterprise']);
       const wait = setInterval(() => {
         if (typeof window.sb !== 'undefined' && window.sb.auth) {
           clearInterval(wait);
-          attachToLinks();
+          attachDelegatedHandler();
         } else if (++retries > 50) {  // 5s timeout
           clearInterval(wait);
           if (config.debug) {
@@ -1767,7 +1768,7 @@ _checkAuth(['standard', 'enterprise']);
         }
       }, 100);
     } else {
-      attachToLinks();
+      attachDelegatedHandler();
     }
   }
 
