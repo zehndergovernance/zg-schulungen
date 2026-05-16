@@ -147,9 +147,11 @@ tr:nth-child(even) td{background:#fafafa;}
     <div id="loginForm">
       <div class="auth-title">Bitte einloggen</div>
       <div class="auth-sub">Zugang nur für Kunden mit aktivem Abonnement.</div>
-      <input class="auth-inp" type="email" id="authEmail" placeholder="E-Mail Adresse">
-      <input class="auth-inp" type="password" id="authPass" placeholder="Passwort">
-      <button class="auth-btn" onclick="doLogin()">Einloggen</button>
+      <form onsubmit="event.preventDefault();doLogin();return false;" autocomplete="on">
+      <input class="auth-inp" type="email" id="authEmail" name="email" autocomplete="email" required placeholder="E-Mail Adresse">
+      <input class="auth-inp" type="password" id="authPass" name="password" autocomplete="current-password" required placeholder="Passwort">
+      <button type="submit" class="auth-btn">Einloggen</button>
+      </form>
       <div class="auth-err" id="authErr"></div>
       <div style="margin-top:14px;font-size:11px;color:rgba(255,255,255,.25);">Noch kein Konto? <a href="https://zehndergovernance.com/#products" style="color:#c08c28;">Produkte ansehen →</a></div>
     </div>
